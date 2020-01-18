@@ -1,15 +1,14 @@
 <template>
   <v-app app>
-
-    <!-- App bar -> default on the top  -->
-    <AppBar></AppBar>
     
     <!-- Navigation panel -> default on the right  -->
-    <v-navigation-drawer permanent :right="rightNavDrawer" width="40%" app>
+    <!-- max-height is by default 100% - height of appbar. It is important to set -->
+    <v-navigation-drawer :right="rightNavDrawer" permanent style="max-height:100vh !important" width="40%" app>
       <router-view></router-view>
     </v-navigation-drawer>
 
-    
+    <!-- App bar -> default on the top  -->
+    <AppBar></AppBar>
 
     <!-- editor container -->
     <v-content><Monaco></Monaco></v-content>

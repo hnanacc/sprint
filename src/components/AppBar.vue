@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-app-bar :bottom="bottomAppBar" dense app>
     <v-toolbar-title>
       <span class="subtitle-1 font-weight-bold">Problem: {{ title }}</span>
@@ -16,6 +17,7 @@
       exact
     >{{ btn.name }}</v-btn>
   </v-app-bar>
+</div>
 </template>
 
 <script>
