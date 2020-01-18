@@ -25,7 +25,7 @@ function createWindow() {
   })
 
   win.maximize(); // Maximize.
-  win.removeMenu(); // Don't need menu.
+  win.setMenuBarVisibility(false); // Don't need menu. win.removeMenu() not working.
 
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
