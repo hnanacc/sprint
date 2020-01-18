@@ -11,23 +11,34 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let win
 
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true, standard: true } }])
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
-    nodeIntegration: true
-  } })
+  win = new BrowserWindow({
+    backgroundColor: "black",
+    show: false,
+    webPreferences: {
+      nodeIntegration: true
+    },
+
+  })
+
+  win.maximize(); // Maximize.
+  win.removeMenu(); // Don't need menu.
+
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  win.show();
 
   win.on('closed', () => {
     win = null
