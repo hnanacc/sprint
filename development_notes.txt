@@ -1,0 +1,31 @@
+Plan for now.
+
+1. Editor structure.
+
+Two halves.
+
+ - left will be coding area, right will be tooling area.
+
+Left : Monaco editor.
+
+Right : 
+ - active tooling 
+ - menu bar
+ 
+ Menu Bar : Four options for now.
+  - control space 
+  - terminal space 
+  - test space
+  - setting space  
+
+===========================================================================
+
+2. Editor notes.
+
+ - 
+
+
+
+===========================================================================
+
+3. 
