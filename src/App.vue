@@ -33,3 +33,22 @@ export default {
   }
 };
 </script>
+
+<style>
+  ::-webkit-scrollbar{
+    height: 4px;
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: grey;
+  }
+</style>

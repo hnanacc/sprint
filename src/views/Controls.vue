@@ -1,10 +1,22 @@
 <template>
-    <div class="purple shower"> controls </div>
+    <v-container fill-height fluid class="d-flex flex-column flex-nowrap pa-0">
+        <ControlTop class="flex-grow-1"></ControlTop>
+        <ControlCenter></ControlCenter>
+        <ControlBottom></ControlBottom>
+    </v-container>
 </template>
 
-<style>
-    .shower{
-        
+<script>
 
+import ControlTop from '@/components/ControlTop.vue';
+import ControlCenter from '@/components/ControlCenter.vue';
+import ControlBottom from '@/components/ControlBottom.vue';
+
+export default {
+    components: {
+        ControlTop,
+        ControlCenter,
+        ControlBottom
     }
-</style>
+}
+</script>

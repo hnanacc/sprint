@@ -2,7 +2,8 @@
 <div>
   <v-app-bar :bottom="bottomAppBar" dense app>
     <v-toolbar-title>
-      <span class="subtitle-1 font-weight-bold">Problem: {{ title }}</span>
+      <span class="caption font-weight-bold">PROBLEM:</span>
+      <span class="subtitle-2"> {{ title }}</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

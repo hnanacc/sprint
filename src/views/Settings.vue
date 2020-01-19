@@ -15,6 +15,7 @@ export default {
     methods: {
         changeTheme: function() {
             this.$vuetify.theme.dark = this.darkmode;
+            this.darkmode = !this.darkmode;
         }
     }
     
