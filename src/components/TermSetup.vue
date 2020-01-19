@@ -8,6 +8,8 @@ import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import { WebLinksAddon } from "xterm-addon-web-links";
 
+const pty = require('node-pty');
+
 const shell = "SHELL";
 
 const ptyProc = pty.spawn(shell, [], {
@@ -43,8 +45,8 @@ export default {
 
     this.term.onResize(size => {
       ptyProc.resize(
-        Math.max(size ? size.cols : term.cols, 1),
-        Math.max(size ? size.rows : term.rows, 1)
+        Math.max(size ? size.cols : this.term.cols, 1),
+        Math.max(size ? size.rows : this.term.rows, 1)
       );
     });
 
