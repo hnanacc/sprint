@@ -33,10 +33,6 @@ export default {
           link: "/"
         },
         {
-          name: "test/tools",
-          link: "/testsuite"
-        },
-        {
           name: "terminal",
           link: "/terminal"
         },
