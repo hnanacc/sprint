@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      text: "[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n[19.01.19 02:33 AM] Build successful.\n"
+      text: "[19.01.19 02:33 AM] Build successfull."
     };
   }
 };
@@ -17,7 +17,7 @@ export default {
 <style>
 .textContainer {
   width: 100%;
-  height: 800px;
+  height: 1200px;
   box-sizing: border-box;
   padding: 5px;
 }
