@@ -1,21 +1,33 @@
 <template>
-  <div id="terminal"></div>
+  <v-container fluid class="pa-1">
+    <div style="overflow-y:scroll!important overflow-x:hidden!important" class="pa-1 black" id="terminal"></div>
+  </v-container>
 </template>
 
 <script>
 import "xterm/css/xterm.css";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
-import { WebLinksAddon } from "xterm-addon-web-links";
+// import { WebLinksAddon } from "xterm-addon-web-links";
 
-const pty = require('node-pty');
+const os = require("os");
+const pty = require("node-pty");
 
-const shell = "SHELL";
+const shell = process.env[os.platform() === "win32" ? "COMSPEC" : "SHELL"];
 
 const ptyProc = pty.spawn(shell, [], {
   name: "xterm-color",
   env: process.env
 });
+
+const term = new Terminal({
+  rows: 40,
+  experimentalCharAtlas: "dynamic"
+});
+
+const fitAddon = new FitAddon();
+
+term.loadAddon(fitAddon);
 
 export default {
   data() {
@@ -25,32 +37,26 @@ export default {
   },
 
   mounted() {
-    alert(this.$el + "is mounted...");
+    console.log("entered");
 
-    this.term = new Terminal();
-    const fitAddon = new FitAddon();
-    const webLinksAddon = new WebLinksAddon();
+    term.open(document.getElementById("terminal"));
 
-    this.term.loadAddon(fitAddon);
-    this.term.loadAddon(webLinksAddon);
-
-    this.term.open(document.getElementById("terminal"));
     fitAddon.fit();
 
-    this.term.onData(data => ptyProc.write(data));
-
-    ptyProc.on("data", function(data) {
-      this.term.write(data);
-    });
-
-    this.term.onResize(size => {
-      ptyProc.resize(
-        Math.max(size ? size.cols : this.term.cols, 1),
-        Math.max(size ? size.rows : this.term.rows, 1)
-      );
-    });
-
-    alert("going");
+    console.log("exiting...");
   }
 };
+
+term.onData(data => ptyProc.write(data));
+ptyProc.on("data", function(data) {
+  console.log(data);
+  term.write(data);
+});
+
+term.onResize(size => {
+  ptyProc.resize(
+    Math.max(size ? size.cols : term.cols, 1),
+    Math.max(size ? size.rows : term.rows, 1)
+  );
+});
 </script>
