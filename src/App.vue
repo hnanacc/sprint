@@ -11,7 +11,7 @@
     <AppBar></AppBar>
 
     <!-- editor container -->
-    <v-content><Monaco></Monaco></v-content>
+    <v-content class="d-flex"><Monaco class="flex-grow-1"></Monaco></v-content>
 
   </v-app>
 </template>

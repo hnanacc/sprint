@@ -8,7 +8,8 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new MonacoEditorPlugin({
-        languages: ['cpp', 'java', 'python']
+        languages: ['cpp', 'java', 'python'],
+        features: ['!gotoSymbol']
       })
     ]
 

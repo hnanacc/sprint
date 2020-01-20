@@ -15,7 +15,10 @@ export default {
       code: '#include <bits/stdc++.h>',
       options: {
           mouseWheelZoom: true,
-          minimap: false,
+          minimap: {
+              enabled: false
+          },
+          fontSize: 17,
       }
     }
   }
@@ -23,8 +26,9 @@ export default {
 </script>
 
 <style>
+
 .editor {
-  width: 100%;
-  height: 100%;
+    height: 100%;
 }
+
 </style>
