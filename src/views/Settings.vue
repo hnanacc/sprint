@@ -7,15 +7,14 @@
 
 <script>
 export default {
-    data(){
-        return {
-            darkmode: true,
+    computed: {
+        darkmode(){
+            return this.$vuetify.theme.dark;
         }
     },
     methods: {
         changeTheme: function() {
-            this.$vuetify.theme.dark = this.darkmode;
-            this.darkmode = !this.darkmode;
+            this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
         }
     }
     

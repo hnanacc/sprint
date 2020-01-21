@@ -40,6 +40,7 @@ export default {
     console.log("entered");
 
     term.open(document.getElementById("terminal"));
+    term.write("Sprint Terminal v0.1.0\n");
 
     fitAddon.fit();
 

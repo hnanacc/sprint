@@ -18,7 +18,7 @@
 
 <script>
 
-import Monaco from '@/editor/Monaco.vue';
+import Monaco from '@/components/Monaco.vue';
 import AppBar from '@/components/AppBar.vue';
 
 export default {
