@@ -24,6 +24,7 @@ function createWindow() {
 
   })
 
+
   win.maximize(); // Maximize.
   win.setMenuBarVisibility(false); // Don't need menu. win.removeMenu() not working.
 
@@ -38,7 +39,10 @@ function createWindow() {
     win.loadURL('app://./index.html')
   }
 
-  win.show();
+  win.on('ready-to-show', function () {
+    win.show();
+    win.focus();
+  })
 
   win.on('closed', () => {
     win = null
