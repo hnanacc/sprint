@@ -1,24 +1,11 @@
-# sprint
+<h3 align='center'> Sprint </h3>
 
-## Project setup
-```
-npm install
-```
+<p align='center' markdown='1'>
+A tailored code editor for competitive programmers
+</p>
+<br>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<img width="100%" src="img/Screenshot%20from%202020-01-23%2023-36-07.png">
+<img width="100%" src="img/Screenshot%20from%202020-01-23%2023-35-52.png">
+                                                                                                                        
+                                                                                                                        
