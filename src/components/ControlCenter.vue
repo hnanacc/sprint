@@ -11,12 +11,20 @@
       <v-btn small @click="addTest">add testcase</v-btn>
       <v-btn small @click="changeMode">{{modeBtnText}}</v-btn>
     </v-container>
+
+    <SessionDialog></SessionDialog>
   </v-container>
 </template>
 
 <script>
 
+import SessionDialog from '@/components/SessionDialog.vue';
+
 export default {
+
+  components: {
+    SessionDialog,
+  },
 
   methods: {
     runCode: function() {
@@ -32,7 +40,7 @@ export default {
       this.$store.commit('changeCustomTestsMode');
     },
     launchSession: function(){
-      this.showDialog = true;
+      this.$store.commit('changeLaunchSessionDialog');
     }
     
   },
@@ -44,7 +52,11 @@ export default {
       } else {
         return 'custom test';
       }
+    },
+    launchSessionDialog(){
+      return this.$store.state.launchSessionDialog;
     }
+    
   },
 
   data(){
@@ -52,8 +64,6 @@ export default {
           files: [
               "A.cpp", "B.cpp", "C.cpp", "D.cpp", "E.cpp", "F.cpp"
           ],
-
-          showDialog: false,
       }
   }
 };

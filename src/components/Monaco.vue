@@ -1,5 +1,5 @@
 <template>
-  <MonacoEditor class="editor" v-model="code" :options="options" language="python" :theme="themeMode"/>
+  <MonacoEditor class="editor" v-model="code" :options="options" language="cpp" :theme="themeMode"/>
 </template>
 
 <script>

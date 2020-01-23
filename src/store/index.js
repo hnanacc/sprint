@@ -13,12 +13,18 @@ export default new Vuex.Store({
       customTestsMode: false, 
     },
 
+    launchSessionDialog: false,
+
   },
   mutations: {
 
     changeCustomTestsMode(state){
       state.layout.customTestsMode = !state.layout.customTestsMode;
+    },
+    changeLaunchSessionDialog(state){
+      state.launchSessionDialog = !state.launchSessionDialog;
     }
+
   },
   actions: {
   },
