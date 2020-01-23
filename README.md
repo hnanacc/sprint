@@ -49,7 +49,7 @@ Every time you work on the project make sure to `pull` the updates from `master`
 * If `electron` fails to install then follow the steps below.
 
 ```sh
-$ cd test-editor
+$ cd sprint
 $ ELECTRON_MIRROR="https://cdn.npm.taobao.org/dist/electron/" npm install electron@latest --verbose
 ```
 
