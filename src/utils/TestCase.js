@@ -1,8 +1,10 @@
 /* 
     Class that represents a testcase.
-    Constains the file location as 'testFile' and the
-    status of the testCase [default | Accepted | Error | Wrong] 
-
+    
+    Fields
+        - fileAddr : Address of the file in file system.
+        - status : The run status of each test case. [default | Accepted | Error | Wrong] 
+    
 */
 
 export default class TestCase {
