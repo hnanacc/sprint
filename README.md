@@ -9,13 +9,6 @@ A tailored code editor for competitive programmers
 
 --------------------------------------------------------------------------------
 
-# Usage 
-
-start the editor
-```sh
-$ sprint 
-```
-
 # Contribution
 
 If you wish to contribute to this repository then follow the steps below to build the project.
@@ -59,5 +52,7 @@ Every time you work on the project make sure to `pull` the updates from `master`
 $ cd test-editor
 $ ELECTRON_MIRROR="https://cdn.npm.taobao.org/dist/electron/" npm install electron@latest --verbose
 ```
+
+----------------------------------
 
 `pull-requests` are welcomed.
