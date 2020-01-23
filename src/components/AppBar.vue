@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-app-bar :bottom="bottomAppBar" dense app>
+  <v-app-bar :bottom="bottomToolBar" dense app>
     <v-toolbar-title>
       <span class="caption font-weight-bold">PROBLEM:</span>
       <span class="subtitle-2"> {{ title }}</span>
@@ -25,7 +25,6 @@
 export default {
   data() {
     return {
-      bottomAppBar: true,
       title: "A",
       routes: [
         {
@@ -42,6 +41,12 @@ export default {
         }
       ]
     };
+  },
+
+  computed: {
+    bottomToolBar(){
+      return this.$store.state.layout.bottomToolBar;
+    }
   }
 };
 </script>

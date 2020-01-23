@@ -9,14 +9,12 @@
       <v-btn small @click="runCode">run code</v-btn>
       <v-btn small @click="compileRunCode">compile/run code</v-btn>
       <v-btn small @click="addTest">add testcase</v-btn>
-      <v-btn small @click="addFile">custom tests</v-btn>
+      <v-btn small @click="changeMode">{{modeBtnText}}</v-btn>
     </v-container>
   </v-container>
 </template>
 
 <script>
-
-
 
 export default {
 
@@ -30,17 +28,32 @@ export default {
     addTest: function() {
       alert("Test Added...");
     },
-    addFile: function() {
-      alert("Adding File...");
+    changeMode: function(){
+      this.$store.commit('changeCustomTestsMode');
     },
+    launchSession: function(){
+      this.showDialog = true;
+    }
     
+  },
+
+  computed: {
+    modeBtnText(){
+      if(this.$store.state.layout.customTestsMode) {
+        return 'normal test';
+      } else {
+        return 'custom test';
+      }
+    }
   },
 
   data(){
       return {
           files: [
               "A.cpp", "B.cpp", "C.cpp", "D.cpp", "E.cpp", "F.cpp"
-          ]
+          ],
+
+          showDialog: false,
       }
   }
 };

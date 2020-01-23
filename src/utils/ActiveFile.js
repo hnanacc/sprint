@@ -13,7 +13,7 @@ export default class ActiveFile {
 
     constructor(editorInstance, dirAddr){
         this.editorInstance = editorInstance;
-        this.dirAddr= dirAddr;
+        this.dirAddr = dirAddr;
         this.testCases = []; 
     }
 }

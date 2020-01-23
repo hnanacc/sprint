@@ -1,15 +1,15 @@
 <template>
-  <div class="textContainer">
+  <div class="textContainer pa-1">
     <textarea readonly class="textbox" v-text="text"></textarea>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      text: "[19.01.19 02:33 AM] Build successfull."
-    };
+  computed: {
+    text(){
+      return "Build Messages..."
+    }
   }
 };
 </script>
@@ -17,9 +17,8 @@ export default {
 <style>
 .textContainer {
   width: 100%;
-  height: 1200px;
+  height: 80%;
   box-sizing: border-box;
-  padding: 5px;
 }
 
 .textbox {
