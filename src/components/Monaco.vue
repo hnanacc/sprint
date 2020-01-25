@@ -1,5 +1,5 @@
 <template>
-  <MonacoEditor class="editor" v-model="code" :options="options" language="cpp" :theme="themeMode"/>
+  <MonacoEditor class="editor" v-model="code" :options="options" :language="curCodeFileLang" :theme="themeMode"/>
 </template>
 
 <script>
@@ -13,6 +13,10 @@ export default {
   computed:{
     themeMode(){
       return this.$vuetify.theme.dark ? 'vs-dark' : 'vs-light';
+    },
+
+    curCodeFileLang(){
+      return (this.$store.state.activeCodeFile ? this.$store.state.activeCodeFile.lang : 'cpp');
     }
   },
 

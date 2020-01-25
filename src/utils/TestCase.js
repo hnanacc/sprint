@@ -9,8 +9,9 @@
 
 export default class TestCase {
 
-    constructor(testFile){
-        this.testFile = testFile;
+    constructor(inputData, expectedData){
+        this.inputData = inputData;
+        this.expectedData = expectedData;
         this.status = 'default';
     }
 
