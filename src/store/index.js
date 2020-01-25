@@ -13,7 +13,9 @@ export default new Vuex.Store({
       customTestsMode: false, 
     },
 
-    launchSessionDialog: false,
+    allCodeFiles: ['a.cpp', 'b.cpp', 'c.cpp', 'd.cpp'],
+    
+
 
   },
   mutations: {
@@ -21,9 +23,6 @@ export default new Vuex.Store({
     changeCustomTestsMode(state){
       state.layout.customTestsMode = !state.layout.customTestsMode;
     },
-    changeLaunchSessionDialog(state){
-      state.launchSessionDialog = !state.launchSessionDialog;
-    }
 
   },
   actions: {

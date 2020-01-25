@@ -29,7 +29,8 @@ export default {
   computed:{
     rightPanel(){
       return this.$store.state.layout.rightPanel;
-    }
+    },
+    
   }
 };
 </script>
@@ -49,6 +50,6 @@ export default {
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: grey;
+    background-color: grey; 
   }
 </style>

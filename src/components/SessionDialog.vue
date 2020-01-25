@@ -1,19 +1,19 @@
 <template>
   <div>
-    <v-dialog max-width="40vw" v-model="launchSessionState">
+    <v-dialog max-width="40vw" :value="launchSessionState">
       <v-container fluid>
         <v-card>
           <v-card-title>Launch Session :-)</v-card-title>
           <v-card-text>
             <v-row class="d-flex align-center justify-center">
               <v-col class="d-flex flex-column">
-                <p class="header">Select Existing</p>
-                <v-btn @click="browse" x-large>Browse</v-btn>
+                <v-btn @click="customCreate" class="mb-2" x-large>custom create</v-btn>
+                <p class="header">Create the folder manually or choose existing</p>
               </v-col>
 
               <v-col class="d-flex flex-column">
-                <p class="header">Create New Folder</p>
-                <v-btn @click="create" x-large>New Folder</v-btn>
+                <v-btn @click="parseContest" class="mb-2" x-large>parse contest</v-btn>
+                <p class="header">Parse problems and testcases from a contest</p>
               </v-col>
             </v-row>
           </v-card-text>
@@ -21,20 +21,21 @@
       </v-container>
     </v-dialog>
 
-    <v-dialog v-model="createNewDialog" max-width="40vw">
+    <v-dialog :value="contestParser" max-width="40vw">
       <v-container>
         <v-card>
-          <v-card-title>Create new session</v-card-title>
+          <v-card-title>Parse contest</v-card-title>
           <v-card-text>
             <v-form>
-              <v-input>Directory name</v-input>
-              <v-select>Select from here</v-select>
+              <!-- write the form here -->
+              <v-text-field outlined label="Contest link" v-model="contestLink"></v-text-field>
             </v-form>
           </v-card-text>
+
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="submit">submit</v-btn>
-            <v-btn @click="cancel">cancel</v-btn>
+            <v-btn @click="submit" class="mr-2">submit</v-btn>
+            <v-btn @click="cancel" class="mr-2">cancel</v-btn>
           </v-card-actions>
         </v-card>
       </v-container>
@@ -48,12 +49,17 @@ const { dialog } = require("electron").remote;
 export default {
   data() {
     return {
-      createNewDialog: false
+      contestParser: false,
+      contestLink: ""
     };
   },
 
   methods: {
-    browse: function() {
+    create: function() {
+      this.$store.commit("changeLaunchSessionDialog");
+      this.createNewDialog = !this.createNewDialog;
+    },
+    customCreate: function() {
       this.$store.commit("changeLaunchSessionDialog");
       var sessionPath = dialog.showOpenDialogSync({
         properties: ["openDirectory"]
@@ -61,18 +67,20 @@ export default {
 
       console.log(sessionPath);
     },
-    create: function() {
+
+    parseContest: function() {
+      this.contestParser = !this.contestParser;
       this.$store.commit("changeLaunchSessionDialog");
-      this.createNewDialog = !this.createNewDialog;
     },
 
     submit: function() {
-      this.createNewDialog = !this.createNewDialog;
-      console.log('New directory created...')
+      this.contestParser = !this.contestParser;
+      console.log("New directory created...");
+      console.log(this.contestLink);
     },
 
     cancel: function() {
-      this.createNewDialog = !this.createNewDialog;
+      this.contestParser = !this.contestParser;
     }
   },
 

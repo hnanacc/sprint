@@ -1,8 +1,9 @@
 <template>
     <v-container fill-height fluid class="d-flex flex-column flex-nowrap pa-0">
+        <ControlCenter></ControlCenter>
         <CustomTestsMode v-if="customTestsMode" class="flex-grow-1"></CustomTestsMode>
         <NormalMode v-else class="flex-grow-1"></NormalMode>
-        <ControlCenter></ControlCenter>
+        
         <ControlBottom></ControlBottom>
     </v-container>
 </template>
