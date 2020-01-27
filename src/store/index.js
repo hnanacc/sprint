@@ -4,29 +4,36 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict: true,
+  strict: false,
   state: {
 
     layout: {
       rightPanel: true,
       bottomToolBar: true,
-      customTestsMode: false, 
+      customTestsMode: false,
     },
 
-    allCodeFiles: ['a.cpp', 'b.cpp', 'c.cpp', 'd.cpp'],
+    editor: null,
+    allCodeFiles: [],
     activeCodeFile: null,
     activateTestCaseDialog: false,
   },
   mutations: {
 
+    activateTestCaseDialog(state){
+      state.activateTestCaseDialog = !state.activateTestCaseDialog;
+    },
+
+    setActiveCodeFile(state, codeFile){
+      state.activeCodeFile = codeFile;
+      state.editor._editor.setModel(codeFile.model);
+    },
+
     changeCustomTestsMode(state){
       state.layout.customTestsMode = !state.layout.customTestsMode;
     },
 
-    addCodeFile(state, newCodeFile){
-
-      console.log(newCodeFile);
-      
+    addCodeFile(state, newCodeFile){      
       state.allCodeFiles.push(newCodeFile);
       state.activeCodeFile = newCodeFile;
     },
@@ -37,6 +44,10 @@ export default new Vuex.Store({
 
     addTestCaseToActiveFile(state, testcase){
       state.activeCodeFile.addTestCase(testcase);
+    },
+
+    setEditor(state, editor){
+      state.editor = editor;
     }
 
   },

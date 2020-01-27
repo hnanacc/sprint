@@ -2,11 +2,16 @@
 
 export default class CodeFile {
     
-    constructor(editorInstance, path){
-        this.editorInstance = editorInstance;
+    constructor(model, path, lang){
+
+        const arr = path.split('/');
+
+        this.text = arr[arr.length - 1];
+        this.value = this.text;
+        this.model = model;
         this.path = path;
         this.testcases = [];
-        this.lang = "python";
+        this.lang = lang;
     }
 
     addTestCase(testCaseObj){
