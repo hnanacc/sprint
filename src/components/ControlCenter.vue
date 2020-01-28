@@ -70,11 +70,13 @@ export default {
 
     newFile: function() {
       var targetPath = dialog.showSaveDialogSync();
-      var newFileModel = this.$store.state.editor.newFile(targetPath[0]);
+      console.log(targetPath);
+
+      var newFileModel = this.$store.state.editor.newFile(targetPath);
 
       const newCodefile = new CodeFile(
         newFileModel.model,
-        targetPath[0],
+        targetPath,
         newFileModel.lang
       );
 
@@ -83,20 +85,22 @@ export default {
 
     openFile: function() {
       var targetPath = dialog.showOpenDialogSync({
-        properties: ["openFile"]
+        properties: ["openFile", "multiSelections"]
       });
 
-      var newFileModel = this.$store.state.editor.newFile(targetPath[0]);
+      for(var item of targetPath){
+        var newFileModel = this.$store.state.editor.newFile(item);
 
-      console.log(newFileModel.model);
+        const openCodeFile = new CodeFile(
+          newFileModel.model,
+          item,
+          newFileModel.lang
+        );
 
-      const openCodeFile = new CodeFile(
-        newFileModel.model,
-        targetPath[0],
-        newFileModel.lang
-      );
+        this.$store.commit("addCodeFile", openCodeFile);
 
-      this.$store.commit("addCodeFile", openCodeFile);
+      }
+      
     },
 
     saveFile: function() {
@@ -118,20 +122,19 @@ export default {
     },
 
     selected: {
-      get: function(){
+      get: function() {
         return this.$store.state.activeCodeFile;
       },
 
-      set: function(newValue){
-        this.$store.commit('setActiveCodeFile', newValue);
+      set: function(newValue) {
+        this.$store.commit("setActiveCodeFile", newValue);
       }
     },
 
     activateTestCaseDialogVal() {
       return this.$store.state.activateTestCaseDialog;
     }
-  },
-
+  }
 };
 </script>
 

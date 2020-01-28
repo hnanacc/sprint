@@ -20,6 +20,12 @@ export default class Editor {
 
 
     newFile(path) {
+
+        if (!fs.existsSync(path)) {
+            var content = `/*\n* Author: bitbeast18\n* Created On: ${new Date().toLocaleString()}\n*/`
+            fs.writeFileSync(path, content);
+        }
+
         var model;
 
         var data = fs.readFileSync(path, 'utf-8');
@@ -39,10 +45,10 @@ export default class Editor {
 
         this._editor.setModel(model);
 
-        return {model, lang};
+        return { model, lang };
     }
 
-    changeModel(model){
+    changeModel(model) {
         this._editor.setModel(model);
     }
 }
