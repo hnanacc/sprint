@@ -11,9 +11,10 @@
       <!-- done -->
     </v-container>
 
-    <v-container class="selector d-flex align-center flex-nowrap">
+    <v-container class="selector d-flex justify-space-around align-center flex-nowrap">
       <v-select
         label="Select problem"
+        class="problemSelector"
         :items="files"
         return-object
         single-line
@@ -145,5 +146,9 @@ export default {
 .selector {
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
+}
+
+.problemSelector {
+  width: 40%;
 }
 </style>
