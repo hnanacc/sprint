@@ -1,38 +1,27 @@
 <template>
-  <div class="textContainer pa-1">
-    <textarea readonly class="textbox" v-text="text"></textarea>
-  </div>
+  <v-container fluid class="eventLogger pa-0 pt-1 pl-1">
+      <v-alert class="ma-1" elevation="10" dismissible v-for="(event, idx) in events" :type="event.type" :key="idx"> {{event.msg}} </v-alert>    
+  </v-container>
 </template>
 
 <script>
 export default {
   computed: {
-    text(){
-      return "Build Messages..."
+    events(){
+      return this.$store.state.buildMessages;
     }
   }
 };
 </script>
 
 <style>
-.textContainer {
-  width: 100%;
-  height: 80%;
-  box-sizing: border-box;
-  border-top: 1px solid grey;
-}
 
-.textbox {
-  box-sizing: border-box;
-  padding: 10px;
-  background: black;
-  height: 100%;
-  width: 100%;
-  resize: none;
-  font-family: monospace;
-  font-size: 14px;
-  overflow-y: scroll;
-  outline: none;
-}
+  .eventLogger {
+    min-height: 40%;
+    max-height: 40%;
+    overflow-y: scroll;
+    border-top: 1px solid grey;
+  }
+
 
 </style>

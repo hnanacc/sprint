@@ -13,6 +13,8 @@ export default new Vuex.Store({
       customTestsMode: false,
     },
 
+    buildMessages: [],
+
     editor: null,
     allCodeFiles: [],
     activeCodeFile: null,
@@ -26,7 +28,7 @@ export default new Vuex.Store({
 
     setActiveCodeFile(state, codeFile){
       state.activeCodeFile = codeFile;
-      state.editor._editor.setModel(codeFile.model);
+      state.editor.changeModel(codeFile.model);
     },
 
     changeCustomTestsMode(state){
@@ -47,7 +49,12 @@ export default new Vuex.Store({
     },
 
     setEditor(state, editor){
-      state.editor = editor;
+      state.editor = editor
+    },
+
+    notify(state, event){
+      state.buildMessages.unshift(event);
+      console.log(state.buildMessages);
     }
 
   },

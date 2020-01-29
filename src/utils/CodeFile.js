@@ -1,15 +1,13 @@
-
+import path from 'path';
 
 export default class CodeFile {
     
-    constructor(model, path, lang){
+    constructor(model, pathaddr, lang){
 
-        const arr = path.split('/');
-
-        this.text = arr[arr.length - 1];
+        this.text = path.basename(pathaddr);
         this.value = this.text;
         this.model = model;
-        this.path = path;
+        this.path = pathaddr;
         this.testcases = [];
         this.lang = lang;
     }

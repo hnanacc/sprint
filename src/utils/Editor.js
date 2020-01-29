@@ -41,8 +41,7 @@ export default class Editor {
         }
 
         model = monaco.editor.createModel(data, lang);
-        console.log(model);
-
+        
         this._editor.setModel(model);
 
         return { model, lang };

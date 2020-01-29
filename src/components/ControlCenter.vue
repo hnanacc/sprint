@@ -104,7 +104,10 @@ export default {
     },
 
     saveFile: function() {
-      console.log("saving file...");
+      this.$store.commit('notify', {
+        type: 'info',
+        msg: 'File saved successfully!'
+      });
     }
   },
 
