@@ -105,6 +105,7 @@ export default {
     },
 
     saveFile: function() {
+      this.$store.state.activeCodeFile.saveFile();
       this.$store.commit('notify', {
         type: 'info',
         msg: 'File saved successfully!'

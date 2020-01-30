@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 
 export default class CodeFile {
     
@@ -23,5 +24,10 @@ export default class CodeFile {
 
     compileRunCode(){
         console.log('Compiling and running code...');
+    }
+
+    saveFile(){
+        const data = this.model.getValue();
+        fs.writeFileSync(this.path, data);
     }
 }

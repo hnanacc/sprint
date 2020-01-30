@@ -12,7 +12,20 @@ export default class CodeRunner {
         }
     }
 
-    runClang(){
+    compileC(){
+        console.log('compile c...');
+    }
+
+    compileCPP(){
+
+    }
+
+    compileJAVA(){
+
+
+    }
+
+    runC(){
         console.log('c code running...');
     }
 

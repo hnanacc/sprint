@@ -2,8 +2,9 @@
   <v-container fluid class="eventLogger pa-0 pt-1 pl-1">
     <v-alert
       class="ma-1"
-      elevation="10"
+      elevation="5"
       dismissible
+      dense
       v-for="(event, idx) in events"
       :type="event.type"
       :key="idx"
