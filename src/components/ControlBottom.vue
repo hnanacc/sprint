@@ -1,7 +1,7 @@
 <template>
   <div class="bottomContainer">
     <div class="controlShare">
-      <ControlNormalMode v-if="customModeState"></controlNormalMode>
+      <ControlNormalMode v-if="!customModeState"></controlNormalMode>
       <ControlCustomMode v-else></controlCustomMode>
     </div>
     <EventLogger class="logger"></EventLogger>

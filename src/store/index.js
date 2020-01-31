@@ -13,7 +13,7 @@ export default new Vuex.Store({
       customTestsMode: false,
     },
 
-    buildMessages: [],
+    eventQueue: [],
 
     editor: null,
     allCodeFiles: [],
@@ -53,8 +53,7 @@ export default new Vuex.Store({
     },
 
     notify(state, event){
-      state.buildMessages.unshift(event);
-      console.log(state.buildMessages);
+      state.eventQueue.unshift(event);
     }
 
   },

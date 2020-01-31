@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="eventLogger pa-0 pt-1 pl-1">
     <v-alert
-      class="ma-1 fill-height"
+      class="ma-1"
       elevation="5"
       dismissible
       dense
@@ -16,7 +16,7 @@
 export default {
   computed: {
     events() {
-      return this.$store.state.buildMessages;
+      return this.$store.state.eventQueue;
     }
   }
 };
