@@ -15,6 +15,7 @@ export default class TestCase {
         this.stdout = null;
         this.stderr = null;
         this.status = 'default';
+        this.state = true;
     }
 
 }

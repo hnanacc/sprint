@@ -46,7 +46,7 @@ export default {
         },
         
         close: function(){
-            this.$store.commit('changeTestCasesDialogState');
+            this.$store.commit('changeAddTestCasesDialogState');
         },
 
     },

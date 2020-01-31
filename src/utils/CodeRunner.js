@@ -75,7 +75,7 @@ class CodeRunner {
     runC(testcase, addr){
 
         const runner_out = spawnSync(addr, {
-            input: testcase,
+            input: testcase.input,
             encoding: 'utf-8',
             windowsHide: true
         })
@@ -86,7 +86,7 @@ class CodeRunner {
     runCPP(testcase, addr){
 
         const runner_out = spawnSync(addr, {
-            input: testcase,
+            input: testcase.input,
             encoding: 'utf-8',
             windowsHide: true
         })
@@ -108,7 +108,7 @@ class CodeRunner {
         }
 
         const runner_out = spawnSync('java', ['-cp', addr, class_name], {
-            input: testcase,
+            input: testcase.input,
             encoding: 'utf-8'
         });
 
@@ -118,7 +118,7 @@ class CodeRunner {
     runPY(testcase, addr){
 
         const interpreter_out = spawnSync('python3', [addr], {
-            input: testcase,
+            input: testcase.input,
             encoding: 'utf-8',
             windowsHide: true
         });

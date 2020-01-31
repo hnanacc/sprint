@@ -30,7 +30,7 @@
       <v-btn @click="saveFile" class="ml-2" small>save file</v-btn>
     </v-container>
 
-    <v-dialog max-width="40%" :value="activateTestCaseDialogVal">
+    <v-dialog max-width="40%" :value="activateAddTestCaseDialogVal">
       <AddTestCaseDialog></AddTestCaseDialog>
     </v-dialog>
   </v-container>
@@ -45,7 +45,7 @@ import AddTestCaseDialog from "@/components/AddTestCaseDialog";
 export default {
 
   components: {
-    AddTestCaseDialog
+    AddTestCaseDialog,
   },
 
   methods: {
@@ -66,7 +66,7 @@ export default {
     },
 
     addTest: function() {
-      this.$store.commit("changeTestCasesDialogState");
+      this.$store.commit("changeAddTestCasesDialogState");
     },
 
     changeMode: function() {
@@ -143,8 +143,8 @@ export default {
       }
     },
 
-    activateTestCaseDialogVal() {
-      return this.$store.state.activateTestCaseDialog;
+    activateAddTestCaseDialogVal() {
+      return this.$store.state.activateAddTestCaseDialog;
     }
   }
 };

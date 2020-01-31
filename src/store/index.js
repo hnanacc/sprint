@@ -18,13 +18,11 @@ export default new Vuex.Store({
     editor: null,
     allCodeFiles: [],
     activeCodeFile: null,
-    activateTestCaseDialog: false,
+    curTestcase: null,
+    activateAddTestCaseDialog: false,
+    activateShowTestCaseDialog: false,
   },
   mutations: {
-
-    activateTestCaseDialog(state){
-      state.activateTestCaseDialog = !state.activateTestCaseDialog;
-    },
 
     setActiveCodeFile(state, codeFile){
       state.activeCodeFile = codeFile;
@@ -40,8 +38,18 @@ export default new Vuex.Store({
       state.activeCodeFile = newCodeFile;
     },
 
-    changeTestCasesDialogState(state){
-      state.activateTestCaseDialog = !state.activateTestCaseDialog;
+    changeAddTestCasesDialogState(state){
+      state.activateAddTestCaseDialog = !state.activateAddTestCaseDialog;
+    },
+
+    changeShowTestCaseDialogState(state, idx){
+
+      if (idx === null){
+        state.curTestcase = null;
+      } else {
+        state.curTestcase = state.activeCodeFile.testcases[idx];
+      }
+      state.activateShowTestCaseDialog = !state.activateShowTestCaseDialog;
     },
 
     addTestCaseToActiveFile(state, testcase){

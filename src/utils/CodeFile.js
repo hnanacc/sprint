@@ -55,17 +55,17 @@ export default class CodeFile {
             if (run_out.status === 0) {
 
                 // Testcase ran successfully.
-                this.test.stdout = run_out.stdout;
-                this.test.stderr = run_out.stderr;
-                this.test.status = this.test.output === this.test.expected
+                test.stdout = run_out.stdout;
+                test.stderr = run_out.stderr;
+                test.status = test.output === test.expected
                                      ? 'accepted' 
                                      : 'wrong';
 
             } else {
                 
                 // An error occured while running testcase.
-                this.test.status = 'error';
-                this.test.stderr = run_out.stderr;
+                test.status = 'error';
+                test.stderr = run_out.stderr;
             }
         }
     }
