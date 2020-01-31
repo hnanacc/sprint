@@ -1,25 +1,17 @@
 <template>
     <v-container fill-height fluid class="d-flex flex-column flex-nowrap pa-0">
-        <ControlCenter></ControlCenter>
-        <CustomTestsMode v-if="customTestsMode" class="flex-grow-1"></CustomTestsMode>
-        <NormalMode v-else class="flex-grow-1"></NormalMode>
-        
+        <ControlTop></ControlTop>
         <ControlBottom></ControlBottom>
     </v-container>
 </template>
 
 <script>
-
-import NormalMode from '@/components/ControlTopNormalMode.vue';
-import CustomTestsMode from '@/components/ControlTopCustomTestsMode.vue';
-import ControlCenter from '@/components/ControlCenter.vue';
+import ControlTop from '@/components/ControlTop.vue';
 import ControlBottom from '@/components/ControlBottom.vue';
 
 export default {
     components: {
-        NormalMode,
-        CustomTestsMode,
-        ControlCenter,
+        ControlTop,
         ControlBottom
     },
 

@@ -96,7 +96,7 @@ class CodeRunner {
 
     runJAVA(testcase, addr){
 
-        const class_name = null;
+        let class_name = null;
 
         if(fs.existsSync(path.resolve(addr, path.basename(addr) + '.class'))){
             // If class with main is public...
@@ -107,7 +107,7 @@ class CodeRunner {
             class_name = 'Solution';
         }
 
-        runner_out = spawnSync('java', ['-cp', addr, class_name], {
+        const runner_out = spawnSync('java', ['-cp', addr, class_name], {
             input: testcase,
             encoding: 'utf-8'
         });

@@ -12,7 +12,8 @@ export default class TestCase {
     constructor(inputData, expectedData){
         this.input = inputData;
         this.expected = expectedData;
-        this.output = null;
+        this.stdout = null;
+        this.stderr = null;
         this.status = 'default';
     }
 
