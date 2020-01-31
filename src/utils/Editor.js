@@ -26,21 +26,21 @@ export default class Editor {
             fs.writeFileSync(path, content);
         }
 
-        var model;
-
         var data = fs.readFileSync(path, 'utf-8');
 
-        var lang = 'cpp';
+        var lang = null;
 
         if (path.endsWith('cpp')) {
             lang = 'cpp';
         } else if (path.endsWith('py')) {
             lang = 'python';
-        } else {
+        } else if (path.endsWith('java')) {
             lang = 'java';
+        } else {
+            lang = 'c';
         }
 
-        model = monaco.editor.createModel(data, lang);
+        var model = monaco.editor.createModel(data, lang);
         
         this._editor.setModel(model);
 

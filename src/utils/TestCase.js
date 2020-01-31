@@ -10,8 +10,9 @@
 export default class TestCase {
 
     constructor(inputData, expectedData){
-        this.inputData = inputData;
-        this.expectedData = expectedData;
+        this.input = inputData;
+        this.expected = expectedData;
+        this.output = null;
         this.status = 'default';
     }
 

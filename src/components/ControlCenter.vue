@@ -43,17 +43,26 @@ import CodeFile from "@/utils/CodeFile";
 import AddTestCaseDialog from "@/components/AddTestCaseDialog";
 
 export default {
+
   components: {
     AddTestCaseDialog
   },
 
   methods: {
     runCode: function() {
-      this.$store.state.activeCodeFile.runCode();
+      const fb = this.$store.state.activeCodeFile.runCode();
+      this.$store.commit('notify', {
+        type: fb.type,
+        msg: `[${fb.time}][${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
+      });
     },
 
     compileRunCode: function() {
-      this.$store.state.activeCodeFile.compileRunCode();
+      const fb = this.$store.state.activeCodeFile.compileRunCode();
+      this.$store.commit('notify', {
+        type: fb.type,
+        msg: `[${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
+      });
     },
 
     addTest: function() {
@@ -65,13 +74,11 @@ export default {
     },
 
     changeActiveFile: function() {
-      console.log(this.activeFile);
       this.$store.state.editor._editor.setModel(this.activeFile);
     },
 
     newFile: function() {
       var targetPath = dialog.showSaveDialogSync();
-      console.log(targetPath);
 
       var newFileModel = this.$store.state.editor.newFile(targetPath);
 
