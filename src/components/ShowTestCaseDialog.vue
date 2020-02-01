@@ -1,3 +1,70 @@
 <template>
-    <div> Hello, world </div>
+  <v-card class="showCont d-flex flex-column">
+    <v-container fluid class="d-flex pa-0">
+      <div>
+        <v-card-title>Testcase #{{ testcase.idx + 1 }}</v-card-title>
+        <v-card-subtitle>{{testcase.testcase.status}}</v-card-subtitle>
+      </div>
+      <v-spacer></v-spacer>
+      <v-btn class="mt-7 mr-7" small @click="closeDialog">close</v-btn>
+    </v-container>
+
+    <v-container class="d-flex flex-grow-1 pt-0 flex-nowrap">
+      <div class="restView mr-3 d-flex flex-column">
+        <p class="caption mb-0">input</p>
+        <textarea class="testCaseBox" readonly v-model="testcase.testcase.input"></textarea>
+        <p class="caption mt-1 mb-0">stderr</p>
+        <textarea class="testCaseBox" readonly v-model="testcase.testcase.stderr"></textarea>
+      </div>
+      <div class="diffView">
+        <p class="caption mb-0">stdout vs expected</p>
+        <MonacoDiff></MonacoDiff>
+      </div>
+    </v-container>
+  </v-card>
 </template>
+
+<script>
+import MonacoDiff from "@/components/MonacoDiff.vue";
+
+export default {
+  components: {
+    MonacoDiff
+  },
+
+  computed: {
+    testcase() {
+      return this.$store.state.curTestcase;
+    }
+  },
+
+  methods: {
+    closeDialog: function() {
+      this.$store.commit("changeShowTestCaseDialogState", null);
+    }
+  }
+};
+</script>
+
+<style>
+.showCont {
+  height: 550px;
+}
+
+.restView {
+  width: 40%;
+}
+
+.diffView {
+  width: 60%;
+}
+
+.testCaseBox {
+  height: 50%;
+  resize: none;
+  background-color: black;
+  padding: 2px;
+  border: 1px solid grey;
+  outline: none;
+}
+</style>

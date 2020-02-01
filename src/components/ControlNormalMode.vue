@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
 
-    <v-dialog max-width="40%" :value="showTestCaseDialogVal">
+    <v-dialog max-width="80%" :value="showTestCaseDialogVal">
       <ShowTestCaseDialog></ShowTestCaseDialog>
     </v-dialog>
 

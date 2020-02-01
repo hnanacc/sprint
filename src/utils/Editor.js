@@ -15,7 +15,23 @@ export default class Editor {
                     enabled: false,
                 }
             });
+        this._diff = null;
+    }
 
+    newDiff(actual, expected){
+
+        var actualModel = monaco.editor.createModel(actual);
+        var expectedModel = monaco.editor.createModel(expected);
+
+        this._diff = monaco.editor.createDiffEditor(document.getElementById("diffEditor"));
+        this._diff.setModel({
+            original: actualModel,
+            modified: expectedModel
+        })
+    }
+
+    closeDiff(){
+        this._diff = null;
     }
 
 

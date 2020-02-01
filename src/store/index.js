@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict: false,
   state: {
 
     layout: {
@@ -46,8 +45,12 @@ export default new Vuex.Store({
 
       if (idx === null){
         state.curTestcase = null;
+        state.editor.closeDiff();
       } else {
-        state.curTestcase = state.activeCodeFile.testcases[idx];
+        state.curTestcase = {
+          testcase: state.activeCodeFile.testcases[idx],
+          idx: idx
+        };
       }
       state.activateShowTestCaseDialog = !state.activateShowTestCaseDialog;
     },
