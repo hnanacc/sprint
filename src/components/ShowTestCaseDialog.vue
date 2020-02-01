@@ -2,8 +2,8 @@
   <v-card class="showCont d-flex flex-column">
     <v-container fluid class="d-flex pa-0">
       <div>
-        <v-card-title>Testcase #{{ testcase.idx + 1 }}</v-card-title>
-        <v-card-subtitle>{{testcase.testcase.status}}</v-card-subtitle>
+        <v-card-title>Testcase #{{ testcase_idx + 1 }}</v-card-title>
+        <v-card-subtitle>{{testcase.status}}</v-card-subtitle>
       </div>
       <v-spacer></v-spacer>
       <v-btn class="mt-7 mr-7" small @click="closeDialog">close</v-btn>
@@ -12,9 +12,9 @@
     <v-container class="d-flex flex-grow-1 pt-0 flex-nowrap">
       <div class="restView mr-3 d-flex flex-column">
         <p class="caption mb-0">input</p>
-        <textarea class="testCaseBox" readonly v-model="testcase.testcase.input"></textarea>
+        <textarea class="testCaseBox" readonly v-model="testcase.input"></textarea>
         <p class="caption mt-1 mb-0">stderr</p>
-        <textarea class="testCaseBox" readonly v-model="testcase.testcase.stderr"></textarea>
+        <textarea class="testCaseBox" readonly v-model="testcase.stderr"></textarea>
       </div>
       <div class="diffView">
         <p class="caption mb-0">stdout vs expected</p>
@@ -34,7 +34,10 @@ export default {
 
   computed: {
     testcase() {
-      return this.$store.state.curTestcase;
+      return this.$store.state.curTestcase.testcase;
+    },
+    testcase_idx(){
+        return this.$store.state.curTestcase.idx;
     }
   },
 

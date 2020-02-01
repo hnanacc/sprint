@@ -44,7 +44,6 @@ export default new Vuex.Store({
     changeShowTestCaseDialogState(state, idx){
 
       if (idx === null){
-        state.curTestcase = null;
         state.editor.closeDiff();
       } else {
         state.curTestcase = {

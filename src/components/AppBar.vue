@@ -28,7 +28,7 @@ export default {
       title: "A",
       routes: [
         {
-          name: "Controls",
+          name: "controls",
           link: "/"
         },
         {
