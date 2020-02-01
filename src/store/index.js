@@ -27,6 +27,10 @@ export default new Vuex.Store({
   },
   mutations: {
 
+    setStatus(state, msg){
+      state.curProcess = msg;
+    },
+
     setActiveCodeFile(state, codeFile){
       state.activeCodeFile = codeFile;
       state.editor.changeModel(codeFile.model);

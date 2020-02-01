@@ -11,14 +11,29 @@
 
       <v-btn small text router to="/terminal" exact @click="setTerminal"> terminal </v-btn>
 
-      <v-btn small text router to="/settings" exact> settings </v-btn>
+      <v-btn small text router to="/settings" exact> 
+        <v-icon> {{icons.mdiMenu}} </v-icon>
+      </v-btn>
 
   </v-app-bar>
 </div>
 </template>
 
 <script>
+
+import {
+  mdiMenu
+} from '@mdi/js';
+
 export default {
+
+  data(){
+    return {
+      icons: {
+        mdiMenu,
+      }
+    }
+  },
 
   computed: {
     bottomToolBar(){

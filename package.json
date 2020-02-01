@@ -26,6 +26,7 @@
     "xterm-addon-web-links": "^0.2.1"
   },
   "devDependencies": {
+    "@mdi/js": "^4.8.95",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-plugin-router": "^4.1.0",

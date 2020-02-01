@@ -1,17 +1,24 @@
 <template>
   <v-container class="ma-0 pa-0">
-    <v-container class="d-flex justify-space-around">
-      <v-btn small class="blue" @click="runCode">run code</v-btn>
-      <!-- vue-done -->
-      <v-btn small @click="compileRunCode">compile/run code</v-btn>
-      <!-- vue-done -->
-      <v-btn small @click="addTest">add testcase</v-btn>
-      <!-- vue-done -->
-      <v-btn small @click="changeMode">{{modeBtnText}}</v-btn>
-      <!-- done -->
+    <v-container class="d-flex">
+      <v-btn class="blue mx-1 runBtn" min-width="100px" rounded @click="compileRunCode">
+        <v-icon left>{{icons.mdiPlay}}</v-icon> run  
+      </v-btn>
+      
+      <v-btn  small class="mx-1" fab  @click="runCode">
+        <v-icon>{{icons.mdiCached}}</v-icon>
+      </v-btn>
+      
+      <v-btn small class="mx-1" fab @click="addTest">
+        <v-icon> {{icons.mdiPlus}} </v-icon>
+      </v-btn>
+      
+      <v-btn small class="mx-1" fab @click="changeMode">
+        <v-icon> {{icons.mdiPencil}} </v-icon>
+      </v-btn>
     </v-container>
 
-    <v-container class="selector d-flex justify-space-around align-center flex-nowrap">
+    <v-container class="selector d-flex align-center flex-nowrap">
       <v-select
         label="Select problem"
         class="problemSelector"
@@ -22,12 +29,18 @@
         hide-details
         dense
         outlined
+        max-width
       ></v-select>
 
-      <v-btn @click="newFile" class="ml-2" small>new file</v-btn>
-      <!-- done -->
-      <v-btn @click="openFile" class="ml-2" small>open file</v-btn>
-      <v-btn @click="saveFile" class="ml-2" small>save file</v-btn>
+      <v-btn fab x-small class='ml-1 mr-3'>
+        <v-icon> {{icons.mdiClose}} </v-icon>
+      </v-btn>
+
+      <v-spacer></v-spacer>
+
+      <v-btn @click="newFile" rounded class="mx-1" min-width="65px" small>new</v-btn>
+      <v-btn @click="openFile" rounded class="mx-1" min-width="65px" small>open</v-btn>
+      <v-btn @click="saveFile" rounded class="mx-1" min-width="65px" small>save</v-btn>
     </v-container>
 
     <v-dialog max-width="40%" :value="activateAddTestCaseDialogVal">
@@ -38,20 +51,41 @@
 
 <script>
 const { dialog } = require("electron").remote;
-import CodeFile from "@/utils/CodeFile";
 
+import CodeFile from "@/utils/CodeFile";
 import AddTestCaseDialog from "@/components/AddTestCaseDialog";
+
+import {
+    mdiPlay,
+    mdiCached,
+    mdiPlus,
+    mdiPencil,
+    mdiClose
+  } from '@mdi/js';
 
 export default {
 
+
   components: {
-    AddTestCaseDialog,
+    AddTestCaseDialog
+  },
+
+  data(){
+    return {
+      icons: {
+        mdiPlus,
+        mdiCached,
+        mdiPencil,
+        mdiPlay,
+        mdiClose,
+      }
+    }
   },
 
   methods: {
     runCode: function() {
       const fb = this.$store.state.activeCodeFile.runCode();
-      this.$store.commit('notify', {
+      this.$store.commit("notify", {
         type: fb.type,
         msg: `[${fb.time}][${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
       });
@@ -59,7 +93,7 @@ export default {
 
     compileRunCode: function() {
       const fb = this.$store.state.activeCodeFile.compileRunCode();
-      this.$store.commit('notify', {
+      this.$store.commit("notify", {
         type: fb.type,
         msg: `[${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
       });
@@ -96,7 +130,7 @@ export default {
         properties: ["openFile", "multiSelections"]
       });
 
-      for(var item of targetPath){
+      for (var item of targetPath) {
         var newFileModel = this.$store.state.editor.newFile(item);
 
         const openCodeFile = new CodeFile(
@@ -106,16 +140,14 @@ export default {
         );
 
         this.$store.commit("addCodeFile", openCodeFile);
-
       }
-      
     },
 
     saveFile: function() {
       this.$store.state.activeCodeFile.saveFile();
-      this.$store.commit('notify', {
-        type: 'info',
-        msg: 'File saved successfully!'
+      this.$store.commit("notify", {
+        type: "info",
+        msg: "File saved successfully!"
       });
     }
   },
@@ -151,12 +183,18 @@ export default {
 </script>
 
 <style>
+
+.runBtn {
+  margin-top: 2px;
+}
+
 .selector {
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
 }
 
 .problemSelector {
-  width: 40%;
+  max-width: 50%;
 }
+
 </style>
