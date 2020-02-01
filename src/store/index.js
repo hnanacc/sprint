@@ -14,6 +14,10 @@ export default new Vuex.Store({
 
     eventQueue: [],
 
+    term: null,
+
+    curProcess: 'Initialised editor',
+
     editor: null,
     allCodeFiles: [],
     activeCodeFile: null,
