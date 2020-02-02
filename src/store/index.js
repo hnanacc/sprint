@@ -16,7 +16,7 @@ export default new Vuex.Store({
 
     term: null,
 
-    curProcess: 'Initialised editor',
+    curProcess: 'Sprint Editor v0.1.0',
 
     editor: null,
     allCodeFiles: [],

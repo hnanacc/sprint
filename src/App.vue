@@ -3,7 +3,7 @@
     
     <!-- Navigation panel -> default on the right  -->
     <!-- max-height is by default 100% - height of appbar. It is important to set -->
-    <v-navigation-drawer :right="rightPanel" permanent style="max-height:100vh !important" width="40%" app>
+    <v-navigation-drawer :right="rightPanel" style="max-height:100vh !important" width="40%" app>
       <router-view></router-view>
     </v-navigation-drawer>
 

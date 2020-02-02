@@ -8,7 +8,7 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new MonacoEditorPlugin({
-        languages: ['cpp', 'java', 'python'],
+        languages: ['c', 'cpp', 'java', 'python'],
         features: ['!gotoSymbol']
       })
     ]
@@ -18,7 +18,10 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       externals:['node-pty'],
-      nodeModulesPath: ['../../node_modules', "./node_modules"]
+      nodeModulesPath: ['../../node_modules', "./node_modules"],
+      builderOptions: {
+        publish: ['github']
+      }
     }
   }
 }
