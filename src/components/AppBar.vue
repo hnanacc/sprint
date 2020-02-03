@@ -25,6 +25,8 @@ import {
   mdiMenu
 } from '@mdi/js';
 
+import '@/utils/CompetitiveCompanion';
+
 export default {
 
   data(){

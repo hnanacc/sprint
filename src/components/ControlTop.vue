@@ -2,19 +2,23 @@
   <v-container class="ma-0 pa-0">
     <v-container class="d-flex">
       <v-btn class="blue mx-1 runBtn" min-width="100px" rounded @click="compileRunCode">
-        <v-icon left>{{icons.mdiPlay}}</v-icon> run  
+        <v-icon left>{{icons.mdiPlay}}</v-icon>run
       </v-btn>
-      
-      <v-btn  small class="mx-1" fab  @click="runCode">
+
+      <v-btn small class="mx-1" fab @click="runCode">
         <v-icon>{{icons.mdiCached}}</v-icon>
       </v-btn>
-      
+
       <v-btn small class="mx-1" fab @click="addTest">
-        <v-icon> {{icons.mdiPlus}} </v-icon>
+        <v-icon>{{icons.mdiPlus}}</v-icon>
       </v-btn>
-      
+
       <v-btn small class="mx-1" fab @click="changeMode">
-        <v-icon> {{icons.mdiPencil}} </v-icon>
+        <v-icon>{{icons.mdiPencil}}</v-icon>
+      </v-btn>
+
+      <v-btn small class="mx-1" fab @click="parseContest">
+        <v-icon>{{icons.mdiWeb}}</v-icon>
       </v-btn>
     </v-container>
 
@@ -32,8 +36,8 @@
         max-width
       ></v-select>
 
-      <v-btn fab x-small class='ml-1 mr-3'>
-        <v-icon> {{icons.mdiClose}} </v-icon>
+      <v-btn fab x-small class="ml-1 mr-3">
+        <v-icon>{{icons.mdiClose}}</v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
@@ -56,21 +60,20 @@ import CodeFile from "@/utils/CodeFile";
 import AddTestCaseDialog from "@/components/AddTestCaseDialog";
 
 import {
-    mdiPlay,
-    mdiCached,
-    mdiPlus,
-    mdiPencil,
-    mdiClose
-  } from '@mdi/js';
+  mdiPlay,
+  mdiCached,
+  mdiPlus,
+  mdiPencil,
+  mdiClose,
+  mdiWeb
+} from "@mdi/js";
 
 export default {
-
-
   components: {
     AddTestCaseDialog
   },
 
-  data(){
+  data() {
     return {
       icons: {
         mdiPlus,
@@ -78,8 +81,9 @@ export default {
         mdiPencil,
         mdiPlay,
         mdiClose,
+        mdiWeb
       }
-    }
+    };
   },
 
   methods: {
@@ -89,6 +93,10 @@ export default {
         type: fb.type,
         msg: `[${fb.time}][${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
       });
+    },
+
+    parseContest: function() {
+      console.log("parsed");
     },
 
     compileRunCode: function() {
@@ -183,7 +191,6 @@ export default {
 </script>
 
 <style>
-
 .runBtn {
   margin-top: 2px;
 }
@@ -196,5 +203,4 @@ export default {
 .problemSelector {
   max-width: 50%;
 }
-
 </style>
