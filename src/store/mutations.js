@@ -106,6 +106,12 @@ export default {
     // Dialog state management.
 
     changeAddTestCaseDialogState(state) {
+
+        if(state.activeCodeFile === null){
+            alert('No file selected. Select one first !');
+            return;
+        }
+
         state.addTestCaseDialogState = !state.addTestCaseDialogState;
     },
 

@@ -193,8 +193,9 @@ export default {
         }
 
         for (let idx in testcases) {
-            fs.writeFileSync(path.resolve(targetPath, `testcase${idx + 1}.in`), testcases[idx].input);
-            fs.writeFileSync(path.resolve(targetPath, `testcase${idx + 1}.out`), testcases[idx].expected);
+            
+            fs.writeFileSync(path.resolve(targetPath[0], `testcase${idx}.in`), testcases[idx].input);
+            fs.writeFileSync(path.resolve(targetPath[0], `testcase${idx}.out`), testcases[idx].expected);
         }
 
     },
@@ -214,15 +215,19 @@ export default {
             return;
         }
 
-        const files = fs.readdirSync(targetPath);
+        const files = fs.readdirSync(targetPath[0]);
 
         for(let file of files){
 
             if(file.endsWith('.in')){
 
                 state.activeCodeFile.addTestCase(
-                    fs.readFileSync(file),
-                    fs.readFileSync(file.slice(0, -3) + '.out')
+                    fs.readFileSync(path.resolve(targetPath[0], file), {
+                        encoding: 'utf-8'
+                    }),
+                    fs.readFileSync(path.resolve(targetPath[0], file.slice(0, -3) + '.out'), {
+                        encoding: 'utf-8'
+                    })
                 )
 
             }
