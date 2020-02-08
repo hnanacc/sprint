@@ -63,44 +63,96 @@ export default {
             dispatch('compileRunCode');
         }
 
-        // The output of code running process.
-        let run_out = null;
+        if (state.layout.customInputMode) {
 
-        // Go through all testcases one by one.
-        for (let test of state.activeCodeFile.testcases) {
+            let avail = true;
 
-            // Run code is different for all languages. Select one.
-            if (state.activeCodeFile.lang === 'c') {
-                run_out = state.runner.runC(test, state.activeCodeFile.exe_addr);
+            state.customIO.clear();
+            let subProcess = state.runner.launchRunProcess(state.activeCodeFile);
 
-            } else if (state.activeCodeFile.lang === 'cpp') {
-                run_out = state.runner.runCPP(test, state.activeCodeFile.exe_addr);
+            let view = state.customIO.getCustomIO();
 
-            } else if (state.activeCodeFile.lang === 'java') {
-                run_out = state.runner.runJAVA(test, state.activeCodeFile.exe_addr);
 
-            } else {
-                run_out = state.runner.runPY(test, state.activeCodeFile.exe_addr);
+            view.onKey((e) => {
+
+                if (avail) {
+
+                    const ev = e.domEvent;
+                    const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
+
+                    if (ev.keyCode === 13) {
+                        view.write('\r\n');
+                        subProcess.stdin.write(e.key);
+                    } else if (ev.keyCode === 8) {
+                        // Do not delete the prompt
+                        if (this.customIO._core.buffer.x > 2) {
+                            view.write('\b \b');
+                        }
+                    } else if (printable) {
+                        view.write(e.key);
+                        subProcess.stdin.write(e.key);
+                    }
+                }
+            });
+
+            subProcess.stdout.on('data', (data) => {
+                view.write('\r\n');
+                view.write(data);
+                view.write('\r\n');
+            })
+
+            subProcess.on('close', (code) => {
+                view.write(`Process exited with exit code ${code}.`);
+                view = null;
+                avail = false;
+            })
+
+            subProcess.on('error', (err) => {
+                alert(err);
+            })
+
+        } else {
+
+            // The output of code running process.
+            let run_out = null;
+
+            // Go through all testcases one by one.
+            for (let test of state.activeCodeFile.testcases) {
+
+                // Run code is different for all languages. Select one.
+                if (state.activeCodeFile.lang === 'c') {
+                    run_out = state.runner.runC(test, state.activeCodeFile.exe_addr);
+
+                } else if (state.activeCodeFile.lang === 'cpp') {
+                    run_out = state.runner.runCPP(test, state.activeCodeFile.exe_addr);
+
+                } else if (state.activeCodeFile.lang === 'java') {
+                    run_out = state.runner.runJAVA(test, state.activeCodeFile.exe_addr);
+
+                } else {
+                    run_out = state.runner.runPY(test, state.activeCodeFile.exe_addr);
+                }
+
+
+                // Check if testcase ran successfully.
+                if (run_out.status === 0) {
+
+                    // Testcase ran successfully.
+                    test.stdout = run_out.stdout.trim();
+                    test.stderr = run_out.stderr.trim();
+
+                    test.status = test.stdout === test.expected
+                        ? 'success'
+                        : 'error';
+
+                } else {
+
+                    // An error occured while running testcase.
+                    test.status = 'warning';
+                    test.stderr = run_out.stderr.trim();
+                }
             }
 
-
-            // Check if testcase ran successfully.
-            if (run_out.status === 0) {
-
-                // Testcase ran successfully.
-                test.stdout = run_out.stdout.trim();
-                test.stderr = run_out.stderr.trim();
-
-                test.status = test.stdout === test.expected
-                    ? 'success'
-                    : 'error';
-
-            } else {
-
-                // An error occured while running testcase.
-                test.status = 'warning';
-                test.stderr = run_out.stderr.trim();
-            }
         }
     },
 
@@ -171,7 +223,7 @@ export default {
         clipboard.writeText(state.editor.getValue());
     },
 
-    saveTestCases({state}) {
+    saveTestCases({ state }) {
 
         if (state.activeCodeFile === null) {
             alert('No file Selected. Select one first!');
@@ -194,16 +246,16 @@ export default {
         }
 
         for (let idx in testcases) {
-            
+
             fs.writeFileSync(path.resolve(targetPath[0], `testcase${idx}.in`), testcases[idx].input);
             fs.writeFileSync(path.resolve(targetPath[0], `testcase${idx}.out`), testcases[idx].expected);
         }
 
     },
 
-    loadTestCases({state}) {
+    loadTestCases({ state }) {
 
-        if(state.activeCodeFile === null){
+        if (state.activeCodeFile === null) {
             alert('No file selected. Select one first !');
             return;
         }
@@ -218,9 +270,9 @@ export default {
 
         const files = fs.readdirSync(targetPath[0]);
 
-        for(let file of files){
+        for (let file of files) {
 
-            if(file.endsWith('.in')){
+            if (file.endsWith('.in')) {
 
                 state.activeCodeFile.addTestCase(
                     fs.readFileSync(path.resolve(targetPath[0], file), {
@@ -233,7 +285,7 @@ export default {
 
             }
         }
-        
+
     }
 
 

@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import {spawnSync} from 'child_process';
+import { spawnSync, spawn } from 'child_process';
 
 export default class CodeRunner {
 
@@ -46,11 +46,11 @@ export default class CodeRunner {
     compileJAVA(addr, lang_dir) {
 
         const exe_addr = path.resolve(lang_dir, path.basename(addr, '.java'));
-        
+
         if (!fs.existsSync(exe_addr)) {
             fs.mkdirSync(exe_addr);
         }
-        
+
         const compiler_out = spawnSync('javac', ['-d', exe_addr, addr], {
             encoding: 'utf-8',
             windowsHide: true
@@ -99,7 +99,8 @@ export default class CodeRunner {
 
         const runner_out = spawnSync('java', ['-cp', addr, class_name], {
             input: testcase.input,
-            encoding: 'utf-8'
+            encoding: 'utf-8',
+            windowsHide: true
         });
 
         return runner_out;
@@ -114,6 +115,55 @@ export default class CodeRunner {
         });
 
         return interpreter_out;
+    }
+
+    launchRunProcess(codeFile) {
+
+        if (codeFile.lang === 'c') {
+
+            return spawn(codeFile.exe_addr, {
+                encoding: 'utf-8',
+                windowsHide: true
+            })
+
+        } else if (codeFile.lang === 'cpp') {
+
+            return spawn(codeFile.exe_addr, {
+                encoding: 'utf-8',
+                windowsHide: true
+            })
+
+        } else if (codeFile.lang === 'java') {
+
+            let class_name = null;
+
+            if (fs.existsSync(path.resolve(codeFile.exe_addr, path.basename(codeFile.exe_addr) + '.class'))) {
+                // If class with main is public
+                class_name = path.basename(codeFile.exe_addr);
+
+            } else {
+                // If class with main is not public
+                class_name = 'Solution';
+            }
+
+            return spawn('java', ['-cp', codeFile.exe_addr, class_name], {
+                encoding: 'utf-8',
+                windowsHide: true
+            });
+
+
+        } else if (codeFile.lang === 'python') {
+
+            return spawn('python3', [codeFile.exe_addr], {
+                encoding: 'utf-8',
+                windowsHide: true
+            })
+
+        } else {
+            alert('Language not available');
+        }
+
+
     }
 
 }

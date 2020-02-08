@@ -10,6 +10,7 @@ export default {
     editor: null,
     runner: null,
     notifier: null,
+    customIO: null,
 
     // File System.
     tempdir: null,

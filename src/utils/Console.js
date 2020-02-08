@@ -58,6 +58,8 @@ export default class Console {
         }
     }
 
+    
+
     spawnPty() {
         const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 

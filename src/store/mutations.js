@@ -2,6 +2,7 @@ import Editor from '@/utils/Editor';
 import CodeRunner from '@/utils/CodeRunner';
 import Notifier from '@/utils/Notifier';
 import Console from '@/utils/Console';
+import CustomIO from '@/utils/CustomIO';
 
 import fs from 'fs';
 import path from 'path';
@@ -79,6 +80,13 @@ export default {
         state.editor.initCodeEditor();
     },
 
+    initCustomIO(state){
+        if (!state.customIO) {
+            state.customIO = new CustomIO();
+        }
+        state.customIO.activate();
+    },
+
     // Code Manager
 
     addCodeFile(state, newCodeFile) {
@@ -90,6 +98,7 @@ export default {
         if (targetCodeFile === null){
             state.activeCodeFile = null;
             state.editor.setModel(null);
+            return;
         }
 
         state.activeCodeFile = targetCodeFile;
