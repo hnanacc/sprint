@@ -12,9 +12,9 @@
     <v-container class="d-flex flex-grow-1 pt-0 flex-nowrap">
       <div class="restView mr-3 d-flex flex-column">
         <p class="caption mb-0">input</p>
-        <textarea class="testCaseBox" readonly v-model="testcase.input"></textarea>
+        <pre class="testCaseBox pa-1">{{testcase.input}}</pre>
         <p class="caption mt-1 mb-0">stderr</p>
-        <textarea class="testCaseBox" readonly v-model="testcase.stderr"></textarea>
+        <pre class="testCaseBox pa-1"> {{testcase.stderr}} </pre>
       </div>
       <div class="diffView">
         <p class="caption mb-0">stdout vs expected</p>
@@ -64,6 +64,7 @@ export default {
 }
 
 .testCaseBox {
+  overflow: scroll; 
   height: 50%;
   resize: none;
   background-color: black;

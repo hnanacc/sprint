@@ -24,8 +24,8 @@ export default {
     add: function() {
 
       this.$store.state.activeCodeFile.addTestCase(
-        this.inputData,
-        this.expectedData
+        this.inputData.trim(),
+        this.expectedData.trim()
       );
 
       this.inputData = "";

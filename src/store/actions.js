@@ -88,17 +88,18 @@ export default {
             if (run_out.status === 0) {
 
                 // Testcase ran successfully.
-                test.stdout = run_out.stdout;
-                test.stderr = run_out.stderr;
-                test.status = test.output === test.expected
-                    ? 'accepted'
-                    : 'wrong';
+                test.stdout = run_out.stdout.trim();
+                test.stderr = run_out.stderr.trim();
+
+                test.status = test.stdout === test.expected
+                    ? 'success'
+                    : 'error';
 
             } else {
 
                 // An error occured while running testcase.
-                test.status = 'error';
-                test.stderr = run_out.stderr;
+                test.status = 'warning';
+                test.stderr = run_out.stderr.trim();
             }
         }
     },
