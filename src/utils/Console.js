@@ -6,7 +6,7 @@ import { WebLinksAddon } from 'xterm-addon-web-links';
 const os = require('os');
 const pty = require('node-pty');
 
-class Console {
+export default class Console {
 
     constructor() {
 
@@ -92,4 +92,3 @@ class Console {
 
 }
 
-export default new Console();

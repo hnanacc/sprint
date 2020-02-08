@@ -5,6 +5,13 @@ import fs from 'fs';
 export default class Editor {
 
     constructor() {
+
+        this._editor = null;
+        this._diff = null;
+    }
+
+    initCodeEditor() {
+
         this._editor = monaco.editor.create(
             document.getElementById("editor"),
             {
@@ -15,36 +22,39 @@ export default class Editor {
                     enabled: false,
                 }
             });
-        this._diff = null;
+
     }
 
-    newDiff(actual, expected){
-
-        var actualModel = monaco.editor.createModel(actual);
-        var expectedModel = monaco.editor.createModel(expected);
-
+    initDiff() {
         this._diff = monaco.editor.createDiffEditor(document.getElementById("diffEditor"));
+    }
+
+    newDiff(actual, expected) {
+
+        const actualModel = monaco.editor.createModel(actual);
+        const expectedModel = monaco.editor.createModel(expected);
+
         this._diff.setModel({
             original: actualModel,
             modified: expectedModel
         })
     }
 
-    closeDiff(){
-        this._diff = null;
+    closeDiff() {
+        
     }
 
 
-    newFile(path) {
+    newModel(path) {
 
         if (!fs.existsSync(path)) {
-            var content = `/*\n* Author: bitbeast18\n* Created On: ${new Date().toLocaleString()}\n*/`
+            const content = `/*\n* Author: bitbeast18\n* Created On: ${new Date().toLocaleString()}\n*/`
             fs.writeFileSync(path, content);
         }
 
-        var data = fs.readFileSync(path, 'utf-8');
+        const data = fs.readFileSync(path, 'utf-8');
 
-        var lang = null;
+        let lang = null;
 
         if (path.endsWith('cpp')) {
             lang = 'cpp';
@@ -56,15 +66,19 @@ export default class Editor {
             lang = 'c';
         }
 
-        var model = monaco.editor.createModel(data, lang);
-        
+        const model = monaco.editor.createModel(data, lang);
+
         this._editor.setModel(model);
 
         return { model, lang };
     }
 
-    changeModel(model) {
+    setModel(model) {
         this._editor.setModel(model);
+    }
+
+    getValue(){
+        return this._editor.getValue();
     }
 }
 

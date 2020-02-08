@@ -1,25 +1,96 @@
 <template>
   <v-container class="ma-0 pa-0">
     <v-container class="d-flex">
-      <v-btn class="blue mx-1 runBtn" min-width="100px" rounded @click="compileRunCode">
-        <v-icon left>{{icons.mdiPlay}}</v-icon>run
-      </v-btn>
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            class="blue mx-1 runBtn"
+            v-on="on"
+            min-width="100px"
+            rounded
+            @click="compileRunCode"
+          >
+            <v-icon left>{{icons.mdiPlay}}</v-icon>run
+          </v-btn>
+        </template>
+        <span>Compile & Run Code</span>
+      </v-tooltip>
 
-      <v-btn small class="mx-1" fab @click="runCode">
-        <v-icon>{{icons.mdiCached}}</v-icon>
-      </v-btn>
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="runCode">
+            <v-icon>{{icons.mdiCached}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Run Code</span>
+      </v-tooltip>
 
-      <v-btn small class="mx-1" fab @click="addTest">
-        <v-icon>{{icons.mdiPlus}}</v-icon>
-      </v-btn>
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="formatLintCode">
+            <v-icon>{{icons.mdiCodeTagsCheck}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Format & Lint Code</span>
+      </v-tooltip>
 
-      <v-btn small class="mx-1" fab @click="changeMode">
-        <v-icon>{{icons.mdiPencil}}</v-icon>
-      </v-btn>
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="copyCode">
+            <v-icon>{{icons.mdiContentCopy}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Copy Code</span>
+      </v-tooltip>
 
-      <v-btn small class="mx-1" fab @click="parseContest">
-        <v-icon>{{icons.mdiWeb}}</v-icon>
-      </v-btn>
+      <v-spacer></v-spacer>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="changeAddTestCaseDialogState">
+            <v-icon>{{icons.mdiPlus}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Add Testcase</span>
+      </v-tooltip>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="saveTestCases">
+            <v-icon>{{icons.mdiArrowDown}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Save Testcases</span>
+      </v-tooltip>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="loadTestCases">
+            <v-icon>{{icons.mdiArrowUp}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Load Testcases</span>
+      </v-tooltip>
+
+      <v-spacer></v-spacer>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1" v-on="on" fab @click="changeCustomInputMode">
+            <v-icon>{{icons.mdiPencil}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Toggle Custom IO</span>
+      </v-tooltip>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn small class="mx-1 mr-2" v-on="on" fab @click="stressTest">
+            <v-icon>{{icons.mdiHammer}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Perform Stress Test</span>
+      </v-tooltip>
     </v-container>
 
     <v-container class="selector d-flex align-center flex-nowrap">
@@ -36,36 +107,61 @@
         max-width
       ></v-select>
 
-      <v-btn fab x-small class="ml-1 mr-3">
-        <v-icon>{{icons.mdiClose}}</v-icon>
-      </v-btn>
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" @click="closeCodeFile" fab x-small class="ml-1 mr-3">
+            <v-icon>{{icons.mdiClose}}</v-icon>
+          </v-btn>
+        </template>
+        <span>Close Current File</span>
+      </v-tooltip>
 
       <v-spacer></v-spacer>
 
-      <v-btn @click="newFile" rounded class="mx-1" min-width="65px" small>new</v-btn>
-      <v-btn @click="openFile" rounded class="mx-1" min-width="65px" small>open</v-btn>
-      <v-btn @click="saveFile" rounded class="mx-1" min-width="65px" small>save</v-btn>
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" @click="newCodeFile" rounded class="mx-1" min-width="65px" small>new</v-btn>
+        </template>
+        <span>Create New File</span>
+      </v-tooltip>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" @click="openCodeFiles" rounded class="mx-1" min-width="65px" small>open</v-btn>
+        </template>
+        <span>Open Files</span>
+      </v-tooltip>
+
+      <v-tooltip open-delay="500" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" @click="saveCodeFile" rounded class="mx-1" min-width="65px" small>save</v-btn>
+        </template>
+        <span>Save File</span>
+      </v-tooltip>
     </v-container>
 
-    <v-dialog max-width="40%" :value="activateAddTestCaseDialogVal">
+    <v-dialog max-width="40%" :value="addTestCaseDialogState">
       <AddTestCaseDialog></AddTestCaseDialog>
     </v-dialog>
   </v-container>
 </template>
 
 <script>
-const { dialog } = require("electron").remote;
-
-import CodeFile from "@/utils/CodeFile";
+// Components.
 import AddTestCaseDialog from "@/components/AddTestCaseDialog";
 
+// Material icons.
 import {
   mdiPlay,
   mdiCached,
   mdiPlus,
   mdiPencil,
   mdiClose,
-  mdiWeb
+  mdiCodeTagsCheck,
+  mdiArrowUp,
+  mdiArrowDown,
+  mdiContentCopy,
+  mdiHammer
 } from "@mdi/js";
 
 export default {
@@ -81,94 +177,16 @@ export default {
         mdiPencil,
         mdiPlay,
         mdiClose,
-        mdiWeb
+        mdiCodeTagsCheck,
+        mdiArrowUp,
+        mdiArrowDown,
+        mdiContentCopy,
+        mdiHammer
       }
     };
   },
 
-  methods: {
-    runCode: function() {
-      const fb = this.$store.state.activeCodeFile.runCode();
-      this.$store.commit("notify", {
-        type: fb.type,
-        msg: `[${fb.time}][${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
-      });
-    },
-
-    parseContest: function() {
-      console.log("parsed");
-    },
-
-    compileRunCode: function() {
-      const fb = this.$store.state.activeCodeFile.compileRunCode();
-      this.$store.commit("notify", {
-        type: fb.type,
-        msg: `[${this.$store.state.activeCodeFile.text}]\n${fb.msg}`
-      });
-    },
-
-    addTest: function() {
-      this.$store.commit("changeAddTestCasesDialogState");
-    },
-
-    changeMode: function() {
-      this.$store.commit("changeCustomTestsMode");
-    },
-
-    changeActiveFile: function() {
-      this.$store.state.editor._editor.setModel(this.activeFile);
-    },
-
-    newFile: function() {
-      var targetPath = dialog.showSaveDialogSync();
-
-      var newFileModel = this.$store.state.editor.newFile(targetPath);
-
-      const newCodefile = new CodeFile(
-        newFileModel.model,
-        targetPath,
-        newFileModel.lang
-      );
-
-      this.$store.commit("addCodeFile", newCodefile);
-    },
-
-    openFile: function() {
-      var targetPath = dialog.showOpenDialogSync({
-        properties: ["openFile", "multiSelections"]
-      });
-
-      for (var item of targetPath) {
-        var newFileModel = this.$store.state.editor.newFile(item);
-
-        const openCodeFile = new CodeFile(
-          newFileModel.model,
-          item,
-          newFileModel.lang
-        );
-
-        this.$store.commit("addCodeFile", openCodeFile);
-      }
-    },
-
-    saveFile: function() {
-      this.$store.state.activeCodeFile.saveFile();
-      this.$store.commit("notify", {
-        type: "info",
-        msg: "File saved successfully!"
-      });
-    }
-  },
-
   computed: {
-    modeBtnText() {
-      if (this.$store.state.layout.customTestsMode) {
-        return "normal test";
-      } else {
-        return "custom test";
-      }
-    },
-
     files() {
       return this.$store.state.allCodeFiles;
     },
@@ -178,13 +196,69 @@ export default {
         return this.$store.state.activeCodeFile;
       },
 
-      set: function(newValue) {
-        this.$store.commit("setActiveCodeFile", newValue);
+      set: function(setCodeFile) {
+        this.$store.commit("setCodeFile", setCodeFile);
       }
     },
 
-    activateAddTestCaseDialogVal() {
-      return this.$store.state.activateAddTestCaseDialog;
+    addTestCaseDialogState() {
+      return this.$store.state.addTestCaseDialogState; 
+    }
+  },
+
+  methods: {
+
+
+    compileRunCode: function() {
+      this.$store.dispatch("compileRunCode");
+    },
+
+    runCode: function() {
+      this.$store.dispatch("runCode");
+    },
+
+    formatLintCode: function(){
+      console.log('Code Formatted...');
+    },
+
+    copyCode: function(){
+      this.$store.dispatch('copyToClipboard');
+    },
+
+    changeAddTestCaseDialogState: function() {
+      this.$store.commit("changeAddTestCaseDialogState");
+    },
+
+    saveTestCases: function(){
+      console.log('Save test case...');
+    },
+
+    loadTestCases: function(){
+      console.log('Load test cases...');
+    },
+
+    changeCustomInputMode: function() {
+      this.$store.commit("changeCustomInputMode");
+    },
+
+    stressTest: function(){
+      alert('This feature is currently in DEVELOPMENT phase. Will be soon available!');
+    },
+
+    closeCodeFile: function(){
+      this.$store.dispatch('closeCodeFile');
+    },
+
+    newCodeFile: function() {
+      this.$store.dispatch("newCodeFile");
+    },
+
+    openCodeFiles: function() {
+      this.$store.dispatch("openCodeFiles");
+    },
+
+    saveCodeFile: function() {
+      this.$store.dispatch("saveCodeFile");
     }
   }
 };

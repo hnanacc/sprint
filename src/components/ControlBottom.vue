@@ -4,7 +4,7 @@
       <ControlNormalMode v-if="!customModeState"></controlNormalMode>
       <ControlCustomMode v-else></controlCustomMode>
     </div>
-    <EventLogger class="logger"></EventLogger>
+    <Notifier class="logger"></Notifier>
   </div>
 </template>
 
@@ -12,18 +12,18 @@
 
 import ControlCustomMode from '@/components/ControlCustomMode.vue';
 import ControlNormalMode from '@/components/ControlNormalMode.vue';
-import EventLogger from '@/components/EventLogger.vue';
+import Notifier from '@/components/Notifier.vue';
 
 export default {
   components: {
     ControlNormalMode,
     ControlCustomMode,
-    EventLogger
+    Notifier
   },
 
   computed: {
     customModeState(){
-      return this.$store.state.layout.customTestsMode;
+      return this.$store.state.layout.customInputMode;
     }
   }
 };

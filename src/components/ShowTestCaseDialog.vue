@@ -34,10 +34,11 @@ export default {
 
   computed: {
     testcase() {
-      return this.$store.state.curTestcase.testcase;
+      console.log(this.$store.state.curTestCase.value);
+      return this.$store.state.curTestCase.value;
     },
     testcase_idx(){
-        return this.$store.state.curTestcase.idx;
+        return this.$store.state.curTestCase.idx;
     }
   },
 

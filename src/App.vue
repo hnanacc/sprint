@@ -3,11 +3,11 @@
     
     <!-- Navigation panel -> default on the right  -->
     <!-- max-height is by default 100% - height of appbar. It is important to set -->
-    <v-navigation-drawer :right="rightPanel" style="max-height:100vh !important" width="40%" app>
+    <v-navigation-drawer class="drawer" :right="rightPanel" style="max-height:100vh !important" width="40%" app>
       <router-view></router-view>
     </v-navigation-drawer>
 
-    <!-- App bar -> default on the top  -->
+    <!-- App bar -> default on the bottom -->
     <AppBar></AppBar>
 
     <!-- editor container -->
@@ -22,6 +22,11 @@ import Monaco from '@/components/Monaco.vue';
 import AppBar from '@/components/AppBar.vue';
 
 export default {
+
+  created: function(){
+    this.$store.commit('initStore');
+  },
+
   components: {
     Monaco,
     AppBar
@@ -36,6 +41,11 @@ export default {
 </script>
 
 <style>
+
+  .drawer {
+    border-left: 1px solid grey;
+  }
+
   ::-webkit-scrollbar{
     height: 4px;
     width: 5px;

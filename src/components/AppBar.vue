@@ -43,13 +43,13 @@ export default {
     },
 
     curEvent(){
-      return this.$store.state.curProcess;
+      return 'Sprint Editor v0.1.0';
     }
   },
 
   methods: {
     setTerminal: function(){
-      this.$store.state.term.focus();
+      this.$store.state.console.focus();
     }
   }
 };

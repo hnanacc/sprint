@@ -4,15 +4,12 @@
 
 <script>
 
-import Editor from '@/utils/Editor';
-
 export default {
-  
-  mounted: function(){
-    var editor = new Editor();
-    this.$store.commit('setEditor', editor);
-  },
 
+  mounted: function(){
+    this.$store.commit('initCodeEditor');
+  }
+  
 }
 </script>
 

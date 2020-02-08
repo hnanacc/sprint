@@ -13,10 +13,11 @@
 </template>
 
 <script>
+
 export default {
   computed: {
     events() {
-      return this.$store.state.eventQueue;
+      return this.$store.state.notifier.renderQueue();
     }
   }
 };

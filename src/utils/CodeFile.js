@@ -1,123 +1,43 @@
+
 import path from 'path';
 import fs from 'fs';
-import codeRunner from '@/utils/CodeRunner';
+
+import TestCase from '@/utils/TestCase';
 
 export default class CodeFile {
 
-    constructor(model, pathaddr, lang) {
+    constructor(model, pathaddr, lang, exe_addr, testcases=[]) {
 
         this.text = path.basename(pathaddr);
         this.value = this.text;
         this.model = model;
         this.path = pathaddr;
-        this.c_source = null;
-        this.testcases = [];
+        this.exe_addr = exe_addr;
+        this.testcases = testcases;
         this.lang = lang;
     }
 
-    addTestCase(testCaseObj) {
+    addTestCase(inputData, expectedData) {
+
+        console.log(expectedData);
+
+        let testCaseObj = new TestCase(
+            inputData,
+            expectedData
+        );
+
+        console.log(testCaseObj);
+
         this.testcases.push(testCaseObj);
-        console.log('test cases added to' + testCaseObj);
     }
 
-    runCode() {
+    removeTestCase(idx){
 
-        // Save file before running.
-        this.saveFile();
-
-        // Check if compiled executable exists.
-        if (this.c_source === null || !fs.existsSync(this.c_source)){
-            this.compileRunCode();
-        }
-
-        // The output of code running process.
-        let run_out = null;
-
-        // Go through all testcases one by one.
-        for(let test of this.testcases){
-
-            // Run code is different for all languages. Select one.
-            if (this.lang === 'c') {    
-                run_out = codeRunner.runC(test, this.c_source);
-
-            } else if (this.lang === 'cpp') {
-                run_out = codeRunner.runCPP(test, this.c_source);
-                
-            } else if (this.lang === 'java') {
-                run_out = codeRunner.runJAVA(test, this.c_source);
-                
-            } else {
-                run_out = codeRunner.runPY(test, this.c_source); 
-            }
-
-
-            // Check if testcase ran successfully.
-            if (run_out.status === 0) {
-
-                // Testcase ran successfully.
-                test.stdout = run_out.stdout;
-                test.stderr = run_out.stderr;
-                test.status = test.output === test.expected
-                                     ? 'accepted' 
-                                     : 'wrong';
-
-            } else {
-                
-                // An error occured while running testcase.
-                test.status = 'error';
-                test.stderr = run_out.stderr;
-            }
-        }
+        this.testcases.splice(idx, 1);
     }
 
-    compileRunCode() {
-
-        // Save file before compiling.
-        this.saveFile();
-
-        // The output of code compiling process.
-        let compile_out = null;
-        
-        // Compile code is different for all languages. Select one.
-        if (this.lang === 'c'){
-            compile_out = codeRunner.compileC(this.path);
-
-        } else if (this.lang === 'cpp'){
-            compile_out = codeRunner.compileCPP(this.path);
-
-        } else if (this.lang === 'java'){
-            compile_out = codeRunner.compileJAVA(this.path);
-
-        } else {
-            // There is no compilation in python. Hence use dummy obj.
-            // Maybe a check can be added for syntactic correctness.
-            compile_out = {
-                status: 0,
-                c_source: this.path
-            }
-        }
-
-        // Check if code compiled successfully.
-        if (compile_out.status === 0){
-
-            // Code compiled successfully.
-            this.c_source = compile_out.c_source;
-            this.runCode();
-
-            return {
-                type: 'success',
-                msg: null
-            }
-
-        } else {
-
-            // Some error occured.
-            return {
-                type: 'error',
-                msg: compile_out.stderr
-            }
-        }
-
+    getTestCases(){
+        return this.testcases;
     }
 
     saveFile() {

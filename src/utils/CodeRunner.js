@@ -1,78 +1,68 @@
-import os from 'os';
-import path from 'path';
+
 import fs from 'fs';
+import path from 'path';
 import {spawnSync} from 'child_process';
 
-class CodeRunner {
+export default class CodeRunner {
 
-    constructor(){
-        this.tempdir = path.resolve(os.tmpdir(), 'sprint_fs');
+    constructor() {
 
-        this.cdir = path.resolve(this.tempdir, 'c');
-        this.cppdir = path.resolve(this.tempdir, 'cpp');
-        this.javadir = path.resolve(this.tempdir, 'java');
+        console.log('Runner initialising...');
+
+        // TODO: Add checks for language specific compiler in PATH variable.
+
+    }
+
+
+    // Methods responsible for Compiling CodeFile source.
+
+    compileC(addr, lang_dir) {
+        const exe_addr = path.resolve(lang_dir, path.basename(addr, '.c'));
+
+        const compiler_out = spawnSync('gcc', [addr, '-o', exe_addr], {
+            encoding: 'utf-8',
+            windowsHide: true
+        });
+
+        compiler_out.exe_addr = exe_addr;
+        return compiler_out;
+    }
+
+    compileCPP(addr, lang_dir) {
+
+        console.log(addr, lang_dir);
+
+        const exe_addr = path.resolve(lang_dir, path.basename(addr, '.cpp'));
+
+        const compiler_out = spawnSync('g++', [addr, '-o', exe_addr], {
+            encoding: 'utf-8',
+            windowsHide: true
+        });
+
+        compiler_out.exe_addr = exe_addr;
+        return compiler_out;
+    }
+
+    compileJAVA(addr, lang_dir) {
+
+        const exe_addr = path.resolve(lang_dir, path.basename(addr, '.java'));
         
-        if(!fs.existsSync(this.tempdir)){
-            fs.mkdirSync(this.tempdir);
+        if (!fs.existsSync(exe_addr)) {
+            fs.mkdirSync(exe_addr);
         }
-
-        if(!fs.existsSync(this.cdir)){
-            fs.mkdirSync(this.cdir);
-        }
-        if(!fs.existsSync(this.cppdir)){
-            fs.mkdirSync(this.cppdir);
-        }
-        if(!fs.existsSync(this.javadir)){
-            fs.mkdirSync(this.javadir);
-        }
-       
-    }
-
-    // compile code methods.
-
-    compileC(addr){
-        const c_source = path.resolve(this.cdir, path.basename(addr, '.c'));
-        console.log(c_source);
-        const compiler_out = spawnSync('gcc', [addr, '-o', c_source], {
+        
+        const compiler_out = spawnSync('javac', ['-d', exe_addr, addr], {
             encoding: 'utf-8',
             windowsHide: true
         });
 
-        compiler_out.c_source = c_source;
+        compiler_out.exe_addr = exe_addr;
         return compiler_out;
     }
 
-    compileCPP(addr){
+    // Methods responsible for Running CodeFile source.
 
-        const c_source = path.resolve(this.cppdir, path.basename(addr, '.cpp'));
-        console.log(c_source);
-        const compiler_out = spawnSync('g++', [addr, '-o', c_source], {
-            encoding: 'utf-8',
-            windowsHide: true
-        });
-
-        compiler_out.c_source = c_source;
-        return compiler_out;
-    }
-
-    compileJAVA(addr){
-        const c_source = path.resolve(this.javadir, path.basename(addr, '.java'));
-        if(!fs.existsSync(c_source)){
-            fs.mkdirSync(c_source);
-        }
-        console.log(c_source);
-        const compiler_out = spawnSync('javac', ['-d', c_source, addr], {
-            encoding: 'utf-8',
-            windowsHide: true
-        });
-
-        compiler_out.c_source = c_source;
-        return compiler_out;
-    }
-
-    // run code methods.
-
-    runC(testcase, addr){
+    runC(testcase, addr) {
 
         const runner_out = spawnSync(addr, {
             input: testcase.input,
@@ -83,7 +73,7 @@ class CodeRunner {
         return runner_out;
     }
 
-    runCPP(testcase, addr){
+    runCPP(testcase, addr) {
 
         const runner_out = spawnSync(addr, {
             input: testcase.input,
@@ -94,16 +84,16 @@ class CodeRunner {
         return runner_out;
     }
 
-    runJAVA(testcase, addr){
+    runJAVA(testcase, addr) {
 
         let class_name = null;
 
-        if(fs.existsSync(path.resolve(addr, path.basename(addr) + '.class'))){
-            // If class with main is public...
+        if (fs.existsSync(path.resolve(addr, path.basename(addr) + '.class'))) {
+            // If class with main is public
             class_name = path.basename(addr);
 
         } else {
-            // If class with main is not public...
+            // If class with main is not public
             class_name = 'Solution';
         }
 
@@ -115,7 +105,7 @@ class CodeRunner {
         return runner_out;
     }
 
-    runPY(testcase, addr){
+    runPY(testcase, addr) {
 
         const interpreter_out = spawnSync('python3', [addr], {
             input: testcase.input,
@@ -125,6 +115,5 @@ class CodeRunner {
 
         return interpreter_out;
     }
-}
 
-export default new CodeRunner();
+}

@@ -1,0 +1,77 @@
+name: Test Build
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+      
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - continue-on-error: true
+      
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          npm run electron:build
+
+      - name: Artifact Summary
+        run: |
+          echo "MacOS bundle size: \n\t$(du -sh macos_path)"
+          echo "Windows bundle size: \n\t$(du -sh windows_path)"
+          echo "Linux bundle size: \n\t$(du -sh linux_path)"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
