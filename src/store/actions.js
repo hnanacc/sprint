@@ -68,6 +68,7 @@ export default {
             let avail = true;
 
             state.customIO.clear();
+            state.customIO.focus();
             let subProcess = state.runner.launchRunProcess(state.activeCodeFile);
 
             let view = state.customIO.getCustomIO();

@@ -20,6 +20,10 @@ export default class CustomIO {
         this.customIO.clear();
     }
 
+    focus(){
+        this.customIO.focus();
+    }
+
     activate(){
         this.customIO.open(document.getElementById('customIO'));
         this.adjustWindowSize();
@@ -32,7 +36,10 @@ export default class CustomIO {
         }
 
         this.customIO.element.style.padding = '5px';
+        
+        setTimeout(() => {
         this.fitAddon.fit();
+        }, 0);
 
         const elemDim = getComputedStyle(document.getElementById('customIO'));
         const customIODim = getComputedStyle(this.customIO.element);
@@ -43,7 +50,11 @@ export default class CustomIO {
         const newPadding = elemHeight - customIOHeight + 5;
 
         if (isNaN(newPadding)) {
-            this.fitAddon.fit();
+
+            setTimeout(() => {
+                this.fitAddon.fit();
+                }, 0);
+
             this.customIO.element.style.paddingBottom = `${newPadding}px`;
         }
     }
