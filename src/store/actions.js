@@ -26,7 +26,7 @@ export default {
         commit('setCodeFile', newCodeFile);
     },
 
-    openCodeFiles({commit, state}) {
+    openCodeFiles({ commit, state }) {
 
         const targetPath = dialog.showOpenDialogSync({
             properties: ["openFile", "multiSelections"],
@@ -52,7 +52,7 @@ export default {
 
     },
 
-    runCode({state, dispatch}) {
+    runCode({ state, dispatch }) {
 
         // Save file before running.
         state.activeCodeFile.saveFile();
@@ -102,7 +102,7 @@ export default {
         }
     },
 
-    compileRunCode({commit, dispatch, state}) {
+    compileRunCode({ commit, dispatch, state }) {
 
         // Save file before compiling.
         state.activeCodeFile.saveFile();
@@ -144,29 +144,62 @@ export default {
 
     },
 
-    saveCodeFile({state}){
+    saveCodeFile({ state }) {
         state.activeCodeFile.saveFile();
     },
 
-    closeCodeFile({commit, state}){
+    closeCodeFile({ commit, state }) {
         const idx = state.allCodeFiles.indexOf(state.activeCodeFile);
         state.allCodeFiles.splice(idx, 1);
 
-        if(state.allCodeFiles.length > 0){
+        if (state.allCodeFiles.length > 0) {
             commit('setCodeFile', state.allCodeFiles[0]);
         } else {
             commit('setCodeFile', null);
         }
     },
 
-    copyToClipboard({state}){
-        
-        if(state.activeCodeFile === null){
+    copyToClipboard({ state }) {
+
+        if (state.activeCodeFile === null) {
             alert('Editor is empty. Open a file first !');
             return;
         }
 
         clipboard.writeText(state.editor.getValue());
+    },
+
+    saveTestCases() {
+
+        if (state.activeCodeFile === null) {
+            alert('No file Selected. Select one !');
+            return;
+        }
+
+        if (state.activeCodeFile.getTestCases().length < 1) {
+            alert('No test cases added. Add one first !');
+            return;
+        }
+
+        const testcases = state.activeCodeFile.getTestCases();
+
+        const targetPath = dialog.showOpenDialogSync({
+            properties: ['createDirectory', 'openDirectory']
+        });
+
+        if (targetPath === undefined) {
+            return;
+        }
+
+        for (let idx in testcases) {
+            fs.writeFileSync(path.resolve(targetPath, `testcase${idx + 1}.in`), testcases[idx].input);
+            fs.writeFileSync(path.resolve(targetPath, `testcase${idx + 1}.out`), testcases[idx].expected);
+        }
+
+    },
+
+    loadTestCases() {
+
     }
 
 

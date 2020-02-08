@@ -19,14 +19,10 @@ export default class CodeFile {
 
     addTestCase(inputData, expectedData) {
 
-        console.log(expectedData);
-
         let testCaseObj = new TestCase(
             inputData,
             expectedData
         );
-
-        console.log(testCaseObj);
 
         this.testcases.push(testCaseObj);
     }
