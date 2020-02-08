@@ -230,11 +230,11 @@ export default {
     },
 
     saveTestCases: function(){
-      console.log('Save test case...');
+      this.$store.dispatch('saveTestCases');
     },
 
     loadTestCases: function(){
-      console.log('Load test cases...');
+      this.$store.dispatch('loadTestCases');
     },
 
     changeCustomInputMode: function() {

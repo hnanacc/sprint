@@ -1,6 +1,7 @@
 import CodeFile from '@/utils/CodeFile';
 
 import fs from 'fs';
+import path from 'path';
 
 const { dialog, clipboard } = require('electron').remote;
 
@@ -169,10 +170,10 @@ export default {
         clipboard.writeText(state.editor.getValue());
     },
 
-    saveTestCases() {
+    saveTestCases({state}) {
 
         if (state.activeCodeFile === null) {
-            alert('No file Selected. Select one !');
+            alert('No file Selected. Select one first!');
             return;
         }
 
@@ -198,8 +199,35 @@ export default {
 
     },
 
-    loadTestCases() {
+    loadTestCases({state}) {
 
+        if(state.activeCodeFile === null){
+            alert('No file selected. Select one first !');
+            return;
+        }
+
+        const targetPath = dialog.showOpenDialogSync({
+            properties: ['openDirectory']
+        });
+
+        if (targetPath === undefined) {
+            return;
+        }
+
+        const files = fs.readdirSync(targetPath);
+
+        for(let file of files){
+
+            if(file.endsWith('.in')){
+
+                state.activeCodeFile.addTestCase(
+                    fs.readFileSync(file),
+                    fs.readFileSync(file.slice(0, -3) + '.out')
+                )
+
+            }
+        }
+        
     }
 
 
