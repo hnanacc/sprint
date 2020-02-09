@@ -15,6 +15,7 @@ export default {
     initStore(state) {
 
         // Independent of DOM.
+        
 
         state.notifier = new Notifier();
         state.runner = new CodeRunner();

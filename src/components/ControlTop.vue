@@ -295,10 +295,6 @@ export default {
     compileRunCode: function() {
       this.$store.state.notifier.reset();
       this.$store.dispatch("compileRunCode");
-      this.$store.dispatch("notify", {
-        type: "info",
-        msg: "Code compiles successfully !"
-      });
     },
 
     runCode: function() {
@@ -312,10 +308,6 @@ export default {
 
     copyCode: function() {
       this.$store.dispatch("copyToClipboard");
-      this.$store.dispatch("notify", {
-        type: "info",
-        msg: "Code copied to clipboard !"
-      });
     },
 
     changeAddTestCaseDialogState: function() {
@@ -324,10 +316,6 @@ export default {
 
     saveTestCases: function() {
       this.$store.dispatch("saveTestCases");
-      this.$store.dispatch("notify", {
-        type: "info",
-        msg: "Testcases saved successfully !"
-      });
     },
 
     loadTestCases: function() {

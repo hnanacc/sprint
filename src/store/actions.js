@@ -7,11 +7,18 @@ const { dialog, clipboard } = require('electron').remote;
 
 export default {
 
-    newCodeFile({ commit, state }) {
+    newCodeFile({ commit, dispatch, state }) {
+
+        commit('start', 'Select file path in dialog');
 
         const targetPath = dialog.showSaveDialogSync();
 
         if (targetPath === undefined) {
+            dispatch('notify', {
+                type: 'warning',
+                msg: 'Create code operation cancelled !'
+            })
+            commit('stop');
             return;
         }
 
@@ -25,15 +32,27 @@ export default {
 
         commit('addCodeFile', newCodeFile);
         commit('setCodeFile', newCodeFile);
+        commit('stop');
+        dispatch('notify', {
+            type: 'success',
+            msg: 'File created successfully !'
+        })
     },
 
-    openCodeFiles({ commit, state }) {
+    openCodeFiles({ commit, dispatch, state }) {
+
+        commit('start', 'Select file paths in dialog');
 
         const targetPath = dialog.showOpenDialogSync({
             properties: ["openFile", "multiSelections"],
         });
 
         if (targetPath === undefined) {
+            dispatch('notify', {
+                type: 'warning',
+                msg: 'Open file operation cancelled !'
+            })
+            commit('stop');
             return;
         }
 
@@ -50,10 +69,17 @@ export default {
         }
 
         commit('setCodeFile', state.allCodeFiles[state.allCodeFiles.length - 1]);
+        commit('stop');
+        dispatch('notify', {
+            type: 'success',
+            msg: 'Files opened successfully !'
+        });
 
     },
 
-    runCode({ state, dispatch }) {
+    runCode({ state, commit, dispatch }) {
+
+        commit('start', 'Running active code');
 
         // Save file before running.
         state.activeCodeFile.saveFile();
@@ -72,6 +98,11 @@ export default {
             let subProcess = state.runner.launchRunProcess(state.activeCodeFile);
 
             let view = state.customIO.getCustomIO();
+
+            dispatch('notify', {
+                type: 'success',
+                msg: 'Running active code file in custom mode.'
+            })
 
 
             view.onKey((e) => {
@@ -109,10 +140,18 @@ export default {
             })
 
             subProcess.on('error', (err) => {
+                dispatch('notify', {
+                    type: 'error',
+                    msg: err
+                })
                 alert(err);
             })
 
+            commit('stop');
+
         } else {
+
+            commit('start', 'Running active code');
 
             // The output of code running process.
             let run_out = null;
@@ -145,19 +184,28 @@ export default {
                     test.status = test.stdout === test.expected
                         ? 'success'
                         : 'error';
+                    
 
                 } else {
 
                     // An error occured while running testcase.
                     test.status = 'warning';
                     test.stderr = run_out.stderr.trim();
-                }
-            }
 
+                    dispatch('notify', {
+                        type: 'error',
+                        msg: `Some testcases failed to run !`
+                    })
+                }
+
+            }
+            commit('stop');
         }
     },
 
     compileRunCode({ commit, dispatch, state }) {
+
+        commit('start', 'Compiling active code');
 
         // Save file before compiling.
         state.activeCodeFile.saveFile();
@@ -191,16 +239,32 @@ export default {
             commit('setObjDirectory', compile_out.exe_addr);
             dispatch('runCode');
 
+            dispatch('notify', {
+                type: 'success',
+                msg: 'Code compiled successfully !'
+            })
+
 
         } else {
 
-            // Some error occured.
+            dispatch('notify', {
+                type: 'error',
+                msg: compile_out.stderr
+            })
         }
+
+        commit('stop');
 
     },
 
-    saveCodeFile({ state }) {
+    saveCodeFile({ state, commit, dispatch }) {
+        commit('start', 'Saving active code');
         state.activeCodeFile.saveFile();
+        dispatch('notify', {
+            type: 'success',
+            msg: 'File saved successfully!'
+        })
+        commit('stop');
     },
 
     closeCodeFile({ commit, state }) {
@@ -214,25 +278,37 @@ export default {
         }
     },
 
-    copyToClipboard({ state }) {
+    copyToClipboard({ state, commit, dispatch }) {
+
+        commit('start', 'Copying active code');
 
         if (state.activeCodeFile === null) {
+            commit('stop');
             alert('Editor is empty. Open a file first !');
             return;
         }
 
         clipboard.writeText(state.editor.getValue());
+        commit('stop');
+        dispatch('notify', {
+            type: 'info',
+            msg: 'File copied to clipboard!'
+        })
     },
 
-    saveTestCases({ state }) {
+    saveTestCases({ state, commit, dispatch }) {
+
+        commit('start', 'Saving test cases');
 
         if (state.activeCodeFile === null) {
             alert('No file Selected. Select one first!');
+            commit('stop');
             return;
         }
 
         if (state.activeCodeFile.getTestCases().length < 1) {
             alert('No test cases added. Add one first !');
+            commit('stop');
             return;
         }
 
@@ -243,21 +319,38 @@ export default {
         });
 
         if (targetPath === undefined) {
+            dispatch('notify', {
+                type: 'warning',
+                msg: 'Save test cases operation cancelled !'
+            })
+            commit('stop')
             return;
         }
 
         for (let idx in testcases) {
 
+            commit('start', `Writing test case ${idx + 1}`);
+
             fs.writeFileSync(path.resolve(targetPath[0], `testcase${idx}.in`), testcases[idx].input);
             fs.writeFileSync(path.resolve(targetPath[0], `testcase${idx}.out`), testcases[idx].expected);
         }
 
+        dispatch('notify', {
+            type: 'success',
+            msg: 'Saved all test cases successfully !'
+        })
+
+        commit('stop');
+
     },
 
-    loadTestCases({ state }) {
+    loadTestCases({ state, commit, dispatch }) {
+
+        commit('start', 'Loading test cases');
 
         if (state.activeCodeFile === null) {
             alert('No file selected. Select one first !');
+            commit('stop');
             return;
         }
 
@@ -266,6 +359,11 @@ export default {
         });
 
         if (targetPath === undefined) {
+            dispatch('notify', {
+                type: 'warning',
+                msg: 'Load testcases operation cancelled !'
+            })
+            commit('stop');
             return;
         }
 
@@ -286,6 +384,12 @@ export default {
 
             }
         }
+
+        commit('stop');
+        dispatch('notify', {
+            type: 'success',
+            msg: 'All test cases loaded successfully !'
+        })
 
     },
 
