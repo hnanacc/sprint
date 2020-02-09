@@ -1,5 +1,6 @@
 'use strict'
 
+import path from 'path'
 import { app, protocol, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import {
@@ -22,6 +23,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true
     },
+    icon: path.join(__static, 'icon.png')
 
   })
 
