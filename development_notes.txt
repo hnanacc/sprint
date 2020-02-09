@@ -17,3 +17,21 @@ Plan for now.
 ===========================================================================
 
 3. 
+
+===========================================================================
+
+4. Keymappings
+
+Toggle Custom IO -> F1
+Compile run code -> shift + enter
+Run code -> ctrl + shift + enter
+Add testcase -> alt + '+'
+Save testcases -> ctrl + t
+Load testcases -> ctrl + l
+Perform stress test -> ctrl + p
+Close current file -> ctrl + w
+New code file -> ctrl + n
+Save code file -> ctrl + s
+Open code file -> ctrl + o
+
+

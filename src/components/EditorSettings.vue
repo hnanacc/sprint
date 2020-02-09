@@ -33,7 +33,7 @@
         @click:prepend="zoomOut"
         thumb-label="always"
         thumb-size="25"
-        thumb-color="pink"
+        thumb-color="accent"
       ></v-slider>
 
       <v-col cols="12" class="pa-0">

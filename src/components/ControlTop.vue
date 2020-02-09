@@ -9,6 +9,8 @@
             min-width="100px"
             rounded
             @click="compileRunCode"
+            v-shortkey="['shift', 'enter']"
+            @shortkey="compileRunCode"
           >
             <v-icon left>{{icons.mdiPlay}}</v-icon>run
           </v-btn>
@@ -18,7 +20,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn small class="mx-1" v-on="on" fab @click="runCode">
+          <v-btn
+            small
+            class="mx-1"
+            v-on="on"
+            fab
+            @click="runCode"
+            v-shortkey="['ctrl', 'shift', 'enter']"
+            @shortkey="runCode"
+          >
             <v-icon>{{icons.mdiCached}}</v-icon>
           </v-btn>
         </template>
@@ -47,7 +57,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn small class="mx-1" v-on="on" fab @click="changeAddTestCaseDialogState">
+          <v-btn
+            small
+            class="mx-1"
+            v-on="on"
+            fab
+            @click="changeAddTestCaseDialogState"
+            v-shortkey="['alt', '+']"
+            @shortkey="changeAddTestCaseDialogState"
+          >
             <v-icon>{{icons.mdiPlus}}</v-icon>
           </v-btn>
         </template>
@@ -56,7 +74,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn small class="mx-1" v-on="on" fab @click="saveTestCases">
+          <v-btn
+            small
+            class="mx-1"
+            v-on="on"
+            fab
+            @click="saveTestCases"
+            v-shortkey="['ctrl', 't']"
+            @shortkey="saveTestCases"
+          >
             <v-icon>{{icons.mdiArrowDown}}</v-icon>
           </v-btn>
         </template>
@@ -65,7 +91,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn small class="mx-1" v-on="on" fab @click="loadTestCases">
+          <v-btn
+            small
+            class="mx-1"
+            v-on="on"
+            fab
+            @click="loadTestCases"
+            v-shortkey="['ctrl', 'l']"
+            @shortkey="loadTestCases"
+          >
             <v-icon>{{icons.mdiArrowUp}}</v-icon>
           </v-btn>
         </template>
@@ -76,7 +110,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn small class="mx-1" v-on="on" fab @click="changeCustomInputMode">
+          <v-btn
+            small
+            class="mx-1"
+            v-on="on"
+            fab
+            v-shortkey="['f1']"
+            @shortkey="changeCustomInputMode"
+            @click="changeCustomInputMode"
+          >
             <v-icon>{{icons.mdiPencil}}</v-icon>
           </v-btn>
         </template>
@@ -85,7 +127,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn small class="mx-1 mr-2" v-on="on" fab @click="stressTest">
+          <v-btn
+            small
+            class="mx-1 mr-2"
+            v-on="on"
+            fab
+            @click="stressTest"
+            v-shortkey="['ctrl', 'p']"
+            @shortkey="stressTest"
+          >
             <v-icon>{{icons.mdiHammer}}</v-icon>
           </v-btn>
         </template>
@@ -109,7 +159,15 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" @click="closeCodeFile" fab x-small class="ml-1 mr-3">
+          <v-btn
+            v-on="on"
+            @click="closeCodeFile"
+            fab
+            x-small
+            class="ml-1 mr-3"
+            v-shortkey="['ctrl', 'w']"
+            @shortkey="closeCodeFile"
+          >
             <v-icon>{{icons.mdiClose}}</v-icon>
           </v-btn>
         </template>
@@ -120,21 +178,48 @@
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" @click="newCodeFile" rounded class="mx-1" min-width="65px" small>new</v-btn>
+          <v-btn
+            v-on="on"
+            @click="newCodeFile"
+            rounded
+            class="mx-1"
+            min-width="65px"
+            small
+            v-shortkey="['ctrl', 'n']"
+            @shortkey="newCodeFile"
+          >new</v-btn>
         </template>
         <span>Create New File</span>
       </v-tooltip>
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" @click="openCodeFiles" rounded class="mx-1" min-width="65px" small>open</v-btn>
+          <v-btn
+            v-on="on"
+            @click="openCodeFiles"
+            rounded
+            class="mx-1"
+            min-width="65px"
+            small
+            v-shortkey="['ctrl', 'o']"
+            @shortkey="openCodeFiles"
+          >open</v-btn>
         </template>
         <span>Open Files</span>
       </v-tooltip>
 
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" @click="saveCodeFile" rounded class="mx-1" min-width="65px" small>save</v-btn>
+          <v-btn
+            v-on="on"
+            @click="saveCodeFile"
+            rounded
+            class="mx-1"
+            min-width="65px"
+            small
+            v-shortkey="['ctrl', 's']"
+            @shortkey="saveCodeFile"
+          >save</v-btn>
         </template>
         <span>Save File</span>
       </v-tooltip>
@@ -202,66 +287,65 @@ export default {
     },
 
     addTestCaseDialogState() {
-      return this.$store.state.addTestCaseDialogState; 
+      return this.$store.state.addTestCaseDialogState;
     }
   },
 
   methods: {
-
-
     compileRunCode: function() {
       this.$store.state.notifier.reset();
       this.$store.dispatch("compileRunCode");
-      this.$store.dispatch('notify', {
-        type: 'info',
-        msg: 'Code compiles successfully !'
-      })
+      this.$store.dispatch("notify", {
+        type: "info",
+        msg: "Code compiles successfully !"
+      });
     },
 
     runCode: function() {
       this.$store.state.notifier.reset();
       this.$store.dispatch("runCode");
-      
     },
 
-    formatLintCode: function(){
-      console.log('Code Formatted...');
+    formatLintCode: function() {
+      console.log("Code Formatted...");
     },
 
-    copyCode: function(){
-      this.$store.dispatch('copyToClipboard');
-      this.$store.dispatch('notify', {
-        type: 'info',
-        msg: 'Code copied to clipboard !'
-      })
+    copyCode: function() {
+      this.$store.dispatch("copyToClipboard");
+      this.$store.dispatch("notify", {
+        type: "info",
+        msg: "Code copied to clipboard !"
+      });
     },
 
     changeAddTestCaseDialogState: function() {
       this.$store.commit("changeAddTestCaseDialogState");
     },
 
-    saveTestCases: function(){
-      this.$store.dispatch('saveTestCases');
-      this.$store.dispatch('notify', {
-        type: 'info',
-        msg: 'Testcases saved successfully !'
-      })
+    saveTestCases: function() {
+      this.$store.dispatch("saveTestCases");
+      this.$store.dispatch("notify", {
+        type: "info",
+        msg: "Testcases saved successfully !"
+      });
     },
 
-    loadTestCases: function(){
-      this.$store.dispatch('loadTestCases');
+    loadTestCases: function() {
+      this.$store.dispatch("loadTestCases");
     },
 
     changeCustomInputMode: function() {
       this.$store.commit("changeCustomInputMode");
     },
 
-    stressTest: function(){
-      alert('This feature is currently in DEVELOPMENT phase. Will be soon available!');
+    stressTest: function() {
+      alert(
+        "This feature is currently in DEVELOPMENT phase. Will be soon available!"
+      );
     },
 
-    closeCodeFile: function(){
-      this.$store.dispatch('closeCodeFile');
+    closeCodeFile: function() {
+      this.$store.dispatch("closeCodeFile");
     },
 
     newCodeFile: function() {
@@ -274,10 +358,10 @@ export default {
 
     saveCodeFile: function() {
       this.$store.dispatch("saveCodeFile");
-      this.$store.dispatch('notify', {
-        type: 'info',
-        msg: 'Code saved successfully !'
-      })
+      this.$store.dispatch("notify", {
+        type: "info",
+        msg: "Code saved successfully !"
+      });
     }
   }
 };

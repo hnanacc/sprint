@@ -43,8 +43,7 @@ export default {
     rightPanel(){
       return !this.$store.state.isLeftDock;
     },
-    
-  }
+  },
 };
 </script>
 

@@ -155,7 +155,7 @@ export default {
     },
 
     changeCustomInputMode(state) {
-        state.layout.customInputMode = !state.layout.customInputMode;
+        state.customInputMode = !state.customInputMode;
     },
 
     // Appearance

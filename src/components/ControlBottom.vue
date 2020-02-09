@@ -23,7 +23,7 @@ export default {
 
   computed: {
     customModeState(){
-      return this.$store.state.layout.customInputMode;
+      return this.$store.state.customInputMode;
     }
   }
 };

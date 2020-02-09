@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 
+Vue.use(require('vue-shortkey'));
+
 Vue.config.productionTip = false
 
 new Vue({
