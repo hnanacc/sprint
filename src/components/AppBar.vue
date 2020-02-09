@@ -63,7 +63,7 @@ export default {
 
   computed: {
     bottomToolBar() {
-      return this.$store.state.layout.bottomToolBar;
+      return !this.$store.state.isTopStatusBar;
     },
 
     curEvent() {

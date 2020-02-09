@@ -157,4 +157,31 @@ export default {
     changeCustomInputMode(state) {
         state.layout.customInputMode = !state.layout.customInputMode;
     },
+
+    // Appearance
+
+    setTheme(state, val){
+        if(val === 'dark'){
+            state.isDarkTheme = true;
+        } else {
+            state.isDarkTheme = false;
+        }
+    },
+
+    setStatusBar(state, val){
+        if(val === 'top'){
+            state.isTopStatusBar = true;
+        } else {
+            state.isTopStatusBar = false;
+        }
+    },
+
+    setDock(state, val){
+        if(val === 'left'){
+            state.isLeftDock = true;
+        } else {
+            state.isLeftDock = false;
+        }
+    }
+
 }

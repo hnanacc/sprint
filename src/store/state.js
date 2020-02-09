@@ -1,9 +1,8 @@
 export default {
-    layout: {
-        rightPanel: true,
-        bottomToolBar: true,
-        customInputMode: true,
-    },
+    isLeftDock: false,
+    isTopStatusBar: false,
+    isDarkTheme: true,
+    customInputMode: true,
 
     // Instances.
     console: null,

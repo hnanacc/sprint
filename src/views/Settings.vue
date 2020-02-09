@@ -33,7 +33,7 @@ export default {
         LanguageSettings
     },
 
-    data: function(){
+    data(){
         return {
             tab: null,
         }

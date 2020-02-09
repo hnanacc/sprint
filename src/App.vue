@@ -27,13 +27,21 @@ export default {
     this.$store.commit('initStore');
   },
 
+  mounted: function(){
+    if(this.$store.state.isDarkTheme){
+      this.$vuetify.theme.dark = true;
+    } else {
+      this.$vuetify.theme.dark = false;
+    }
+  },
+
   components: {
     Monaco,
     AppBar
   },
   computed:{
     rightPanel(){
-      return this.$store.state.layout.rightPanel;
+      return !this.$store.state.isLeftDock;
     },
     
   }
@@ -44,6 +52,7 @@ export default {
 
   .drawer {
     border-left: 1px solid grey;
+    border-right: 1px solid grey;
   }
 
   ::-webkit-scrollbar{
