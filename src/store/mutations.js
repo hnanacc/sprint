@@ -109,8 +109,17 @@ export default {
         state.activeCodeFile.exe_addr = path;
     },
 
+    // Status bar
 
+    start(state, msg){
+        state.status = msg;
+        state.processRunning = true; 
+    },
 
+    stop(state){
+        state.status = 'Sprint Editor v0.1.0';
+        state.processRunning = false;
+    },
 
     // Dialog state management.
 

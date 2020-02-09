@@ -287,7 +287,11 @@ export default {
             }
         }
 
-    }
+    },
+
+    notify({state}, ev){
+        state.notifier.notify(ev);
+    },
 
 
 

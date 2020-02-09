@@ -25,6 +25,8 @@ export default {
         value: null,
         idx: null
     },
+    status: 'Sprint Editor v0.1.0',
+    processRunning: false,
 
     // Dialog boxes.
     addTestCaseDialogState: false,

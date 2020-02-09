@@ -2,7 +2,8 @@
 <div>
   <v-app-bar :bottom="bottomToolBar" dense app>
     <v-toolbar-title>
-      <span class="subtitle-2"> {{ curEvent }}</span>
+      <v-progress-circular :indeterminate="statusLoader" width="2" size="20"></v-progress-circular>
+      <span class="caption ml-2"> {{ curEvent }}</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -43,7 +44,11 @@ export default {
     },
 
     curEvent(){
-      return 'Sprint Editor v0.1.0';
+      return this.$store.state.status;
+    },
+
+    statusLoader(){
+      return this.$store.state.processRunning;
     }
   },
 
