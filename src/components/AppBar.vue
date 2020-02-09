@@ -53,7 +53,6 @@ export default {
             link: '/settings',
             isLink: true,
             action: function(){
-              console.log(`moved to settings`);
             }
           },
 

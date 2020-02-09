@@ -34,7 +34,6 @@ export default {
 
   computed: {
     testcase() {
-      console.log(this.$store.state.curTestCase.value);
       return this.$store.state.curTestCase.value;
     },
     testcase_idx(){

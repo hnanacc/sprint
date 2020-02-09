@@ -303,7 +303,6 @@ export default {
     },
 
     formatLintCode: function() {
-      console.log("Code Formatted...");
     },
 
     copyCode: function() {

@@ -10,10 +10,6 @@ export default {
     this.$store.commit('initDiffEditor');
   },
 
-  destroyed: function(){
-    console.log('Getting destroyed');
-  }
-
 }
 </script>
 

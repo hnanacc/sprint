@@ -7,8 +7,6 @@ export default class CodeRunner {
 
     constructor() {
 
-        console.log('Runner initialising...');
-
         // TODO: Add checks for language specific compiler in PATH variable.
 
     }
@@ -29,8 +27,6 @@ export default class CodeRunner {
     }
 
     compileCPP(addr, lang_dir) {
-
-        console.log(addr, lang_dir);
 
         const exe_addr = path.resolve(lang_dir, path.basename(addr, '.cpp'));
 

@@ -14,7 +14,6 @@ class CompetitiveCompanion {
         
         app.post('/', (req, res) => {
 
-            console.log(req.body);
             
             this.parseTasks(req.body);
         
@@ -25,18 +24,12 @@ class CompetitiveCompanion {
         app.listen(this._port, (err) => {
         
             if (err) {
-                console.log(err);
+                process.exit();
             }
         
-            console.log(`Listening on port ${this._port}...`);
         
         });
 
-    }
-
-    parseTasks(tasks){
-        console.log('parsing tasks...');
-        console.log(tasks);
     }
 
     setPort(port){

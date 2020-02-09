@@ -1,5 +1,7 @@
 {
   "name": "sprint",
+  "author": "Harshal Nandigramwar <pro.bbcom18@gmail.com>",
+  "description": "A tailored code editor for competitive programmers",
   "version": "0.1.0",
   "private": true,
   "scripts": {
