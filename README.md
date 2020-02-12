@@ -1,3 +1,7 @@
+<p align='center'>
+  <img height='80px' width='80px' src='img/icon.png'>
+</p>
+
 <h3 align='center'> Sprint </h3>
 
 <p align='center' markdown='1'>
