@@ -31,8 +31,7 @@ jobs:
 
       # Publish to GitHub Release.
       - name: Release
-        uses: jasonetco/upload-to-release@v0.1.1
+        uses: actions/upload-artifact@v1
         with:
-          args: ./dist_electron/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            name: Setup ${{matrix.os}}
+            path: dist_electron
