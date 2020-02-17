@@ -2,9 +2,10 @@ name: Release Build
 
 # Important as it'll run on every release event[Delete, Edit].
 on:
-  release:
-    types: [created, edited, prereleased]
-
+  push:
+    branches:
+      - master
+  
 jobs:
   release:
     name: Release Task
