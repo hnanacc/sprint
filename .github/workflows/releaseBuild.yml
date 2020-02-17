@@ -3,7 +3,7 @@ name: Release Build
 # Important as it'll run on every release event[Delete, Edit].
 on:
   release:
-    types: [created, edited]
+    types: [created, edited, prereleased]
 
 jobs:
   release:
