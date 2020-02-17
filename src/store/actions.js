@@ -89,7 +89,7 @@ export default {
             dispatch('compileRunCode');
         }
 
-        if (state.layout.customInputMode) {
+        if (state.customInputMode) {
 
             let avail = true;
 
@@ -98,6 +98,7 @@ export default {
             let subProcess = state.runner.launchRunProcess(state.activeCodeFile);
 
             let view = state.customIO.getCustomIO();
+            view.write("");
 
             dispatch('notify', {
                 type: 'success',
@@ -128,13 +129,11 @@ export default {
             });
 
             subProcess.stdout.on('data', (data) => {
-                view.write('\r\n');
                 view.write(data);
-                view.write('\r\n');
             })
 
             subProcess.on('close', (code) => {
-                view.write(`Process exited with exit code ${code}.`);
+                view.write(`Process exited with exit code ${code}.\r\n`);
                 view = null;
                 avail = false;
             })
