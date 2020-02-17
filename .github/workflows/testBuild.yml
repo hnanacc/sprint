@@ -24,8 +24,3 @@ jobs:
           npm install
           npm run electron:build
 
-      - name: Artifact Summary
-        run: |
-          echo "MacOS bundle size: \n\t$(du -sh ./dist_electron/*.dmg)"
-          echo "Windows bundle size: \n\t$(du -sh ./dist_electron/*.exe)"
-          echo "Linux bundle size: \n\t$(du -sh ./dist_electron/*.AppImage)"
