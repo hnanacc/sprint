@@ -1,23 +1,21 @@
-name: Test Build
+name: Build Test
 
-on: 
+on:
   push:
     branches:
       - master
 
 jobs:
   build:
+    name: Build Task
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
-      
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - continue-on-error: true
-      
       - name: Checkout
         uses: actions/checkout@v1
 
@@ -30,48 +28,3 @@ jobs:
           echo "MacOS bundle size: \n\t$(du -sh ./dist_electron/*.dmg)"
           echo "Windows bundle size: \n\t$(du -sh ./dist_electron/*.exe)"
           echo "Linux bundle size: \n\t$(du -sh ./dist_electron/*.AppImage)"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        

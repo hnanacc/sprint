@@ -4,34 +4,34 @@ name: Release Build
 on:
   release:
     types:
-    - created
+      - created
 
 jobs:
   release:
+    name: Release Task
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-    
+
       # If anything fails just stop the release.
       fail-fast: true
-
 
     runs-on: ${{ matrix.os }}
 
     # Clones the repo.
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    
-    # Build using electron-builder and generate artifacts.
-    - name: Build
-      run: |
-        npm run electron:build
-    
-    # Publish to GitHub Release.
-    - name: Release
-      uses: jasonetco/upload-to-release@v0.1.1
-      with:
-        args: ./dist_electron/
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      # Build using electron-builder and generate artifacts.
+      - name: Build
+        run: |
+          npm run electron:build
+
+      # Publish to GitHub Release.
+      - name: Release
+        uses: jasonetco/upload-to-release@v0.1.1
+        with:
+          args: ./dist_electron/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
