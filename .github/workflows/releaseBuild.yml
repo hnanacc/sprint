@@ -32,6 +32,6 @@ jobs:
     - name: Release
       uses: jasonetco/upload-to-release@v0.1.1
       with:
-        args: write the filename here.
+        args: ./dist_electron/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

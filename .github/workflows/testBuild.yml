@@ -27,9 +27,9 @@ jobs:
 
       - name: Artifact Summary
         run: |
-          echo "MacOS bundle size: \n\t$(du -sh macos_path)"
-          echo "Windows bundle size: \n\t$(du -sh windows_path)"
-          echo "Linux bundle size: \n\t$(du -sh linux_path)"
+          echo "MacOS bundle size: \n\t$(du -sh ./dist_electron/*.dmg)"
+          echo "Windows bundle size: \n\t$(du -sh ./dist_electron/*.exe)"
+          echo "Linux bundle size: \n\t$(du -sh ./dist_electron/*.AppImage)"
 
 
 
