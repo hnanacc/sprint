@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - master
-  
+
 jobs:
   release:
     name: Release Task
@@ -33,5 +33,5 @@ jobs:
       - name: Release
         uses: actions/upload-artifact@v1
         with:
-            name: Setup ${{matrix.os}}
-            path: dist_electron
+          name: Setup ${{matrix.os}}
+          path: dist_electron

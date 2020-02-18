@@ -1,11 +1,11 @@
 <template>
-  <v-container style="overflow-y:auto!important" fill-height fluid>
+  <v-container style="overflow-y:auto!important" fluid>
     <v-card flat class="flex-grow-1" v-if="showBackground">
       <v-card-text class="text-center">{{backgroundText}}</v-card-text>
     </v-card>
 
-    <v-row v-if="!showBackground">
-      <v-col class="ma-1 my-2 pa-0" v-for="(test, idx) in testcases" :key="idx">
+    <v-row justify="start" align="center" v-if="!showBackground">
+      <v-col class="ma-1 shrink my-2 pa-0" v-for="(test, idx) in testcases" :key="idx">
         <v-chip
           v-show="test.state"
           close
