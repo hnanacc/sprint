@@ -9,21 +9,17 @@ A tailored code editor for competitive programmers
 </p>
 <br>
 
---------------------------------------------------------------------------------
-  
-<p align='center'>
-  
-  [![Build Test](https://github.com/bitbeast18/sprint/workflows/Build%20Test/badge.svg)](https://github.com/bitbeast18/sprint/actions/)
-  
-  [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)  
-  
-  [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-
-</p>
-
 <img width="100%" src="img/ui.png">
 
---------------------------------------------------------------------------------
+---------------------------------------------------
+
+### Status
+
+[![Build Test](https://github.com/bitbeast18/sprint/workflows/Build%20Test/badge.svg)](https://github.com/bitbeast18/sprint/actions/)
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+
+--------------------------------------------------
 
 # Why should you use it?
 
@@ -74,6 +70,8 @@ If you are on MAC then download the `.dmg` or the `.app` package from the link a
 
 If you wish to build the project from source then check the contributing guide for initial setup and just run the `electron:build` npm script. You may need `windows-build-tools` if you are on windows.
 
+-------------------------------------------------
+
 ### Intended Workflow
 
 The editor was designed with competitive programmers in mind. It introduces some tools and UI changes to usual editor so that it makes the whole experience simple and less annoying. Most of the annoying tasks are handled for you. The editor was created with the following workflow in mind.
@@ -100,6 +98,8 @@ Contest-name
 ```
 
 Any suggestion to above workflow are encouraged. 
+
+--------------------------------------
 
 # Contribution
 
