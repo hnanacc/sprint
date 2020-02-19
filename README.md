@@ -29,9 +29,10 @@ A tailored code editor for competitive programmers
 - A new way of navigating between files. It's called the SELECTOR.
 - Automatically detects languages from the file name and adjusts the environment accordingly.
 - Optional RERUN button to execute code without comiling again and again.
+- Inbuilt terminal support
 - Format and Lint code on demand.
-- Custom IO mode for experimenting with your code and single tasks.
-- Testcase mode for adding, comparing and running multiple testcases with one click.
+- Custom IO mode for experimenting with your code and running single tasks.
+- Testcase mode for adding, comparing and running multiple testcases with one click. Options to save and load testcases.
 - Colored chips that show your execution result in a single glance.
 - Improved notification system to keep track of events and tasks.
 - Awesome UI customisations to fit your taste.
